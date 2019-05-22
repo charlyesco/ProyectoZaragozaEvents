@@ -17,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
+import android.widget.Filter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,IEventos,SearchView.OnQueryTextListener {
     ListView listView;
+
     ProgressBar pb;
     MenuItem searchMenuItem;
     final NavigationActivity contrato = this;
@@ -48,7 +50,7 @@ public class NavigationActivity extends AppCompatActivity
         pb = new ProgressBar(NavigationActivity.this);
         pb = findViewById(R.id.progressBar);
         pb.setVisibility(View.VISIBLE);
-        //fasdfd
+
         pb.setProgress(0);
 
 
@@ -69,6 +71,7 @@ public class NavigationActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         listView.setTextFilterEnabled(true);
         adaptadorFiltro = new AdaptadorFiltro(NavigationActivity.this,datos);
+
         listView.setAdapter(adaptadorFiltro);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -166,9 +169,10 @@ public class NavigationActivity extends AppCompatActivity
     public boolean onQueryTextChange(String newText)
     {
 
-        if (TextUtils.isEmpty(newText)) {
+       if (TextUtils.isEmpty(newText)) {
             listView.clearTextFilter();
-        } else {
+       } else {
+
             listView.setFilterText(newText);
         }
         return true;

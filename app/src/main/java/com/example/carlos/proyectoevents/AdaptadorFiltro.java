@@ -72,7 +72,7 @@ public class AdaptadorFiltro extends BaseAdapter implements Filterable {
     }
 
     @Override
-    public Filter getFilter() {
+    public  Filter getFilter() {
         return new Filter() {
 
             @Override
