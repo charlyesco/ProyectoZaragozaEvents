@@ -110,20 +110,33 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
                     JSONObject horas = null;
 //recoge las horas y los dias pero y si hay mas dias o diferentes horarios
                     //solucion concatenarlostodo
+                    String horario="",empieza,termina,dia,horarios="";
                         for (int k = 0; k < contHours.length(); k++) {
                             horas = contHours.getJSONObject(k);
                             try {
-                            evento.setStartTime(horas.getString(STARTHOUR));
+                                 empieza=horas.getString(STARTHOUR);
+
                             } catch (JSONException ex) {
-                                evento.setStartTime("");
-                            }
-                            try {
-                                evento.setEndTime(horas.getString(ENDHOUR));
-                            } catch (JSONException ex) {
-                                evento.setEndTime("");
+                               empieza="";
                             }
 
+                            try {
+                                termina="-"+horas.getString(ENDHOUR)+"  ";
+
+                            } catch (JSONException ex) {
+                              termina="";
+                            }
+                            try {
+                                dia=horas.getString(DAYWEEK);
+
+                            } catch (JSONException ex) {
+                                dia="";
+                            }
+                              horario=dia+" "+empieza+""+termina;
+                            horarios+=" "+horario;
+
                         }
+                    evento.setHorario(horarios);
 
                 }
                 //RECOGEMOS EL TEMA DEL EVENTO

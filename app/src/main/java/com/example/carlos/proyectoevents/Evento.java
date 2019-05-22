@@ -24,6 +24,7 @@ public class Evento {
     private String startTime;
     private String endTime;
     private String dayOfWeek;
+    private String horario;
 
 
     public Evento(String titleEvent,String description,String lugar,String starDate,String titleCategory){
@@ -175,6 +176,14 @@ public class Evento {
 
     public void setDayOfWeek(String dayOfWeek) {
         this.dayOfWeek = dayOfWeek;
+    }
+
+    public String getHorario() {
+        return horario;
+    }
+
+    public void setHorario(String horario) {
+        this.horario = horario;
     }
 }
 
