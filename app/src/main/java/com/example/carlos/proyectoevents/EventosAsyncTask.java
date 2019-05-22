@@ -108,13 +108,19 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
 
                     JSONArray contHours = l.getJSONArray(OPENHOUR);
                     JSONObject horas = null;
-
+//recoge las horas y los dias pero y si hay mas dias o diferentes horarios
+                    //solucion concatenarlostodo
                         for (int k = 0; k < contHours.length(); k++) {
                             horas = contHours.getJSONObject(k);
                             try {
                             evento.setStartTime(horas.getString(STARTHOUR));
                             } catch (JSONException ex) {
                                 evento.setStartTime("");
+                            }
+                            try {
+                                evento.setEndTime(horas.getString(ENDHOUR));
+                            } catch (JSONException ex) {
+                                evento.setEndTime("");
                             }
 
                         }
