@@ -94,7 +94,7 @@ public class DescriptionActivity extends AppCompatActivity {
         tv_category.setText(extras.getString(EventosAsyncTask.TITLE_CATEGORY));
         tv_title.setText(extras.getString(EventosAsyncTask.TITLE));
         tv_desc.setText(extras.getString(EventosAsyncTask.DESCRIPTION));
-        tv_lugar.setText(extras.getString(EventosAsyncTask.LUGAR));
+        tv_lugar.setText(extras.getString(EventosAsyncTask.STREET));
 
 
         tv_desc.setText(Html.fromHtml(Html.fromHtml(extras.getString(EventosAsyncTask.DESCRIPTION)).toString()));

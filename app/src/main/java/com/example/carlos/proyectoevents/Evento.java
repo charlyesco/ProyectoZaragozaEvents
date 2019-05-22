@@ -22,6 +22,11 @@ public class Evento {
     private String description;
     private int image;
     private String endDate;
+    //horas
+    private String startTime;
+    private String endTime;
+    private String dayOfWeek;
+
 
     public Evento(String titleEvent,String description,String lugar,String starDate,String titleCategory){
         this.description=description;
@@ -148,6 +153,30 @@ public class Evento {
 
     public void setEndDate(String endDate) {
         this.endDate = endDate;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getDayOfWeek() {
+        return dayOfWeek;
+    }
+
+    public void setDayOfWeek(String dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
     }
 }
 

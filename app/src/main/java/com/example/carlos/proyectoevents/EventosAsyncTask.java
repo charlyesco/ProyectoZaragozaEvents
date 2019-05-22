@@ -19,13 +19,20 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
     IEventos eventoMain;
     public static final String TITLE = "title";
     public static final String DESCRIPTION = "description";
-    public static final String LUGAR = "streetAddress";
+    public static final String STREET = "streetAddress";
     public static final String SUBEVENTOS = "subEvent";
     public static final String lOCATIONS = "location";
     public static final String CATEGORY = "category";
     public static final String TITLE_CATEGORY = "titleCategory";
+    //FECHAS
     public static final String STARTDATE = "startDate";
     public static final String ENDDATE = "endDate";
+    //HORAS
+    public static final String STARTHOUR = "startTime";
+    public static final String ENDHOUR = "endtTime";
+    public static final String OPENHOUR = "openingHours";
+    public static final String DAYWEEK = "dayOfWeek";
+
 
     public EventosAsyncTask(IEventos ievento) {
         eventoMain = ievento;
@@ -51,7 +58,7 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
             //Total de eventos a recoger.
             JSONArray arrayeventos = coleccion.getJSONArray(RESULT);
 
-            for (int i = 0; i < arrayeventos.length(); i++) {// arrayeventos.length()
+            for (int i = 0; i < arrayeventos.length(); i++) {
                 //cada iteración es un evento
                 evento = new Evento();
                 JSONObject contenedor = null;
@@ -89,10 +96,18 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
                     try {
                         //cada iteracion es una propiedad del subevento
                         JSONObject location = subEvent.getJSONObject(x).getJSONObject(lOCATIONS);
-                        evento.setAddres(location.getString(LUGAR));
+                        evento.setAddres(location.getString(STREET));
+
                     } catch (JSONException ex) {
                         evento.setAddres("No Disponible");
-                        ex.printStackTrace();
+                    }
+                    try {
+                    JSONObject hours = subEvent.getJSONObject(x).getJSONObject(OPENHOUR);
+                    evento.setStartTime(hours.getString(STARTHOUR));
+                    evento.setEndTime(hours.getString(ENDHOUR));
+                    evento.setDayOfWeek(hours.getString(DAYWEEK));
+                    } catch (JSONException ex) {
+
                     }
                 }
 

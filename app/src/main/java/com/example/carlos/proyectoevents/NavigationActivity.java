@@ -81,7 +81,7 @@ public class NavigationActivity extends AppCompatActivity
                 Intent intento = new Intent(NavigationActivity.this,DescriptionActivity.class);
                 intento.putExtra(EventosAsyncTask.TITLE, e.getTitleEvent().toString());
                 intento.putExtra(EventosAsyncTask.DESCRIPTION, e.getDescription().toString());
-                intento.putExtra(EventosAsyncTask.LUGAR, e.getAddres().toString());
+                intento.putExtra(EventosAsyncTask.STREET, e.getAddres().toString());
                 intento.putExtra(EventosAsyncTask.TITLE_CATEGORY, e.getTitleCategory().toString());
                 intento.putExtra(EventosAsyncTask.STARTDATE,e.getStartDate().toString());
                 intento.putExtra(EventosAsyncTask.ENDDATE,e.getEndDate());
