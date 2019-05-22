@@ -1,5 +1,8 @@
 package com.example.carlos.proyectoevents;
 
+
+import java.util.Date;
+
 public class Evento {
     private String id;
     private String titleEvent;
@@ -36,6 +39,7 @@ public class Evento {
 
 
     public Evento(){
+
     }
 
     public String getId() {
