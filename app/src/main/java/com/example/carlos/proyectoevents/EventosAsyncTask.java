@@ -1,6 +1,5 @@
 package com.example.carlos.proyectoevents;
 
-
 import android.os.AsyncTask;
 
 import org.json.JSONArray;
@@ -74,7 +73,7 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
                     evento.setDescription(contenedor.getString(DESCRIPTION));
                 } catch (JSONException ex) {
 
-                    evento.setDescription("No disponible");
+                    evento.setDescription("Descripción no disponible");
                 }
                 try {
                     evento.setStartDate(contenedor.getString(STARTDATE));
@@ -91,26 +90,40 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
 
 
                 //EL TITULO
+                // JSONArray arrayeventos = coleccion.getJSONArray(RESULT);
+                //contenedor = arrayeventos.getJSONObject(i);
                 JSONArray subEvent = contenedor.getJSONArray(SUBEVENTOS);
+                JSONObject l = null;
                 for (int x = 0; x < subEvent.length(); x++) {
+
+                    l = subEvent.getJSONObject(x);
+                    //cada iteracion es una propiedad del subevento
                     try {
-                        //cada iteracion es una propiedad del subevento
-                        JSONObject location = subEvent.getJSONObject(x).getJSONObject(lOCATIONS);
-                        evento.setAddres(location.getString(STREET));
+                        JSONObject loca = l.getJSONObject(lOCATIONS);
+                        evento.setAddres(loca.getString(STREET));
 
                     } catch (JSONException ex) {
-                        evento.setAddres("No Disponible");
+                        evento.setAddres("Dirección no disponible");
                     }
-                    try {
-                    JSONObject hours = subEvent.getJSONObject(x).getJSONObject(OPENHOUR);
-                    evento.setStartTime(hours.getString(STARTHOUR));
-                    evento.setEndTime(hours.getString(ENDHOUR));
-                    evento.setDayOfWeek(hours.getString(DAYWEEK));
-                    } catch (JSONException ex) {
 
-                    }
+                    JSONArray contHours = l.getJSONArray(OPENHOUR);
+                    JSONObject horas = null;
+
+                        for (int k = 0; k < contHours.length(); k++) {
+                            horas = contHours.getJSONObject(k);
+                            try {
+                            evento.setStartTime(horas.getString(STARTHOUR));
+                            } catch (JSONException ex) {
+                                evento.setStartTime("");
+                            }
+                            try {
+                                evento.setEndTime(horas.getString(ENDHOUR));
+                            } catch (JSONException ex) {
+                                evento.setEndTime("");
+                            }
+                        }
+
                 }
-
                 //RECOGEMOS EL TEMA DEL EVENTO
                 JSONArray category = contenedor.getJSONArray(CATEGORY);
                 for (int k = 0; k < category.length(); k++) {
@@ -162,3 +175,14 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
     }
 }
 
+//try{
+//   evento.setEndTime(hours.getString(ENDHOUR));
+
+// }catch (JSONException ex){
+//    evento.setEndTime("");
+// }
+//   try{
+//    evento.setDayOfWeek(hours.getString(DAYWEEK));
+// }catch (JSONException ex){
+//    evento.setDayOfWeek("");
+// }
