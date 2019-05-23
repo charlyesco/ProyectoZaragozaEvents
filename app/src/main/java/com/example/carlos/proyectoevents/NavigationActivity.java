@@ -144,11 +144,13 @@ public class NavigationActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        if (id == R.id.nav_manage) {
+        if (id == R.id.buscar) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.licencias) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nosotros) {
+
+        }else if(id== R.id.contacto){
 
         }
 

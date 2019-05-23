@@ -7,19 +7,19 @@
     <item android:title="Opciones">
         <menu>
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/buscar"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Mi perfil" />
+                android:title="Busqueda" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/nosotros"
                 android:icon="@drawable/ic_menu_send"
                 android:title="Nosotros" />
             <item
-                android:id="@+id/nav_manage"
+                android:id="@+id/contacto"
                 android:icon="@drawable/ic_menu_manage"
                 android:title="Contacto" />
             <item
-                android:id="@+id/ic_menu_slideshow"
+                android:id="@+id/licencias"
                 android:icon="@drawable/ic_menu_manage"
                 android:title="Licencias y Términos" />
         </menu>
