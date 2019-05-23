@@ -23,6 +23,7 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
     public static final String lOCATIONS = "location";
     public static final String CATEGORY = "category";
     public static final String TITLE_CATEGORY = "titleCategory";
+    public static final String PLACE = "title";
     //FECHAS
     public static final String STARTDATE = "startDate";
     public static final String ENDDATE = "endDate";
@@ -94,50 +95,72 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
                 //contenedor = arrayeventos.getJSONObject(i);
                 JSONArray subEvent = contenedor.getJSONArray(SUBEVENTOS);
                 JSONObject l = null;
+                JSONObject loca = null;
                 for (int x = 0; x < subEvent.length(); x++) {
 
                     l = subEvent.getJSONObject(x);
                     //cada iteracion es una propiedad del subevento
                     try {
-                        JSONObject loca = l.getJSONObject(lOCATIONS);
-                        evento.setAddres(loca.getString(STREET));
 
-                    } catch (JSONException ex) {
-                        evento.setAddres("Dirección no disponible");
+
+                        loca = l.getJSONObject(lOCATIONS);
+
+                        try {
+
+                            evento.setAddres(loca.getString(STREET));
+
+                        } catch (JSONException ex) {
+                            evento.setAddres("");
+                        }
+                        try {
+
+                            evento.setLocation(loca.getString(PLACE));
+                        } catch (JSONException ex) {
+                            evento.setLocation("Localización no disponible");
+                        }
+                    } catch (JSONException e) {
+                        evento.setAddres("");
+                        evento.setLocation("Localización no disponible");
                     }
+                    JSONArray contHours = null;
+                    try {
+                        contHours = l.getJSONArray(OPENHOUR);
 
-                    JSONArray contHours = l.getJSONArray(OPENHOUR);
-                    JSONObject horas = null;
+                        JSONObject horas = null;
 //recoge las horas y los dias pero y si hay mas dias o diferentes horarios
-                    //solucion concatenarlostodo
-                    String horario="",empieza,termina,dia,horarios="";
+                        //solucion concatenarlostodo
+                        String horario = "", empieza, termina, dia, horarios = "";
                         for (int k = 0; k < contHours.length(); k++) {
                             horas = contHours.getJSONObject(k);
                             try {
-                                 empieza=horas.getString(STARTHOUR);
+                                empieza = horas.getString(STARTHOUR);
 
                             } catch (JSONException ex) {
-                               empieza="";
+                                empieza = "";
                             }
 
                             try {
-                                termina="-"+horas.getString(ENDHOUR)+"  ";
+                                termina = "-" + horas.getString(ENDHOUR) + "  ";
 
                             } catch (JSONException ex) {
-                              termina="";
+                                termina = "";
                             }
                             try {
-                                dia=horas.getString(DAYWEEK);
+                                dia = horas.getString(DAYWEEK);
 
                             } catch (JSONException ex) {
-                                dia="";
+                                dia = "";
                             }
-                              horario=dia+" "+empieza+""+termina;
-                            horarios+=" "+horario;
+                            horario = dia + " " + empieza + "" + termina;
+                            horarios += " " + horario;
 
                         }
-                    evento.setHorario(horarios);
-
+                        evento.setHorario(horarios);
+                    } catch (JSONException e) {
+                        evento.setHorario("");
+                        evento.setStartTime("");
+                        evento.setEndTime("");
+                    }
                 }
                 //RECOGEMOS EL TEMA DEL EVENTO
                 JSONArray category = contenedor.getJSONArray(CATEGORY);
