@@ -7,15 +7,16 @@ public class Evento {
     private String location;
     private String addres;
     private String region;
-    private String cp;
     private String telefono;
     //tema del evento
     private String titleCategory;
     //longitud izquierda
     //latitud centro o izq
     //elevacion izquierda o no aparece
-    private float latitud;
-    private float longitud;
+   // private float latitud;
+   // private float longitud;
+    private double c0;
+    private String c1;
     private String startDate;
     private String description;
     private int image;
@@ -80,13 +81,6 @@ public class Evento {
         this.addres = addres;
     }
 
-    public String getCp() {
-        return cp;
-    }
-
-    public void setCp(String cp) {
-        this.cp = cp;
-    }
 
     public String getTelefono() {
         return telefono;
@@ -94,23 +88,6 @@ public class Evento {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
-    }
-
-
-    public float getLatitud() {
-        return latitud;
-    }
-
-    public void setLatitud(float latitud) {
-        this.latitud = latitud;
-    }
-
-    public float getLongitud() {
-        return longitud;
-    }
-
-    public void setLongitud(float longitud) {
-        this.longitud = longitud;
     }
 
     public String getStartDate() {
@@ -184,6 +161,22 @@ public class Evento {
 
     public void setHorario(String horario) {
         this.horario = horario;
+    }
+
+    public double getC0() {
+        return c0;
+    }
+
+    public void setC0(double c0) {
+        this.c0 = c0;
+    }
+
+    public String getC1() {
+        return c1;
+    }
+
+    public void setC1(String c1) {
+        this.c1 = c1;
     }
 }
 

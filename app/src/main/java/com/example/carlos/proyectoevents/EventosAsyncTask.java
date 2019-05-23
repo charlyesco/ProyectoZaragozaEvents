@@ -32,7 +32,10 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
     public static final String ENDHOUR = "endtTime";
     public static final String OPENHOUR = "openingHours";
     public static final String DAYWEEK = "dayOfWeek";
-
+    public static final String GEOMETRY = "geometry";
+    public static final String COORDINANTES = "coordinates";
+    public static final int COORD0 = 0;
+    public static final String COORD1 = "1";
 
     public EventosAsyncTask(IEventos ievento) {
         eventoMain = ievento;
@@ -101,8 +104,6 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
                     l = subEvent.getJSONObject(x);
                     //cada iteracion es una propiedad del subevento
                     try {
-
-
                         loca = l.getJSONObject(lOCATIONS);
 
                         try {
@@ -175,6 +176,27 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
                     }
 
                 }
+
+                //  JSONObject geometry = contenedor.getJSONObject(GEOMETRY);
+
+                //     JSONArray coord = geometry.getJSONArray(COORDINANTES);
+
+                //for (int m = 0; m < coord.length(); m++) {
+                //    try {
+                //         JSONObject c1 = coord.getJSONObject(m);
+                //        evento.setC1(c1.getString(COORD1).toString());
+
+                //  } catch (JSONException v) {
+                //   }
+                //    try {
+                //      JSONObject c0 = coord.getJSONObject(m);
+                //    evento.setC0(Double.parseDouble(c0.getString(String.valueOf(COORD0)).toString()));
+
+                //  } catch (JSONException v) {
+                //      v.printStackTrace();
+                //     v.getMessage();
+                //  }
+                // }
 
                 publishProgress(evento);
             }

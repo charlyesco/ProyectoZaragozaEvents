@@ -1,10 +1,17 @@
 package com.example.carlos.proyectoevents;
 
+import android.annotation.TargetApi;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.CalendarContract;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.method.ScrollingMovementMethod;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 
@@ -19,12 +26,18 @@ import java.util.Locale;
 public class DescriptionActivity extends AppCompatActivity {
     public static String title = "";
 
+    @TargetApi(Build.VERSION_CODES.N)
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        GregorianCalendar c;
+        GregorianCalendar c = null;
         String start = null, end = null, startDayName = null, endDayName = null, startMonthName = null, endMonthName = null;
         int startYearName = 0, endYearName = 0, startFinalDay = 0, endFinalDay = 0, startMonth = 0, endMonth = 0, startWeekDay = 0, endWeekDay = 0, todayFinalDay = 0, todayMonth = 0, todayYear = 0;
-        String mensaje = null, mensaje2 = null, mensaje3 = null;
+        String mensaje = null, mensaje2 = null, mensaje3 = null,mensajeMañana=null,mensajeMismoDia;
+        ImageButton b;
+        Date date = null,date2=null;
+
+
 
         int today = 0;
 
@@ -33,8 +46,10 @@ public class DescriptionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_description);
 
         title = extras.getString(EventosAsyncTask.TITLE);
+        final String des=extras.getString(EventosAsyncTask.DESCRIPTION),cat=extras.getString(EventosAsyncTask.TITLE_CATEGORY),lugar=extras.getString(EventosAsyncTask.STREET);
+        final String m= Html.fromHtml(extras.getString(EventosAsyncTask.DESCRIPTION), Html.FROM_HTML_MODE_LEGACY).toString();
 
-
+        b=findViewById(R.id.bt_desc_anadir);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(title);
@@ -58,7 +73,7 @@ public class DescriptionActivity extends AppCompatActivity {
         try {
             c = new GregorianCalendar();
             //Fecha cuando empieza
-            Date date = format.parse(start);
+            date = format.parse(start);
             c.setTime(date);
 
             startFinalDay = c.get(Calendar.DATE);//num dia
@@ -68,7 +83,7 @@ public class DescriptionActivity extends AppCompatActivity {
             startYearName = c.get(Calendar.YEAR);
 
             //Fecha cuando acaba
-            Date date2 = format.parse(end);
+            date2 = format.parse(end);
             c.setTime(date2);
 
 
@@ -93,7 +108,7 @@ public class DescriptionActivity extends AppCompatActivity {
 
         tv_category.setText(extras.getString(EventosAsyncTask.TITLE_CATEGORY));
         tv_title.setText(extras.getString(EventosAsyncTask.TITLE));
-        tv_desc.setText(extras.getString(EventosAsyncTask.DESCRIPTION));
+        // tv_desc.setText(extras.getString(EventosAsyncTask.DESCRIPTION));
         tv_lugar.setText(extras.getString(EventosAsyncTask.STREET));
 
 
@@ -103,6 +118,8 @@ public class DescriptionActivity extends AppCompatActivity {
                 "Termina el " + endDayName + " " + endFinalDay + " de " + endMonthName + " de " + endYearName;
         mensaje2 = "El evento se realizará hoy.";
         mensaje3 = "Comienza hoy y acaba el " + endDayName + " " + endFinalDay + " de " + endMonthName + " de " + endYearName;
+        mensajeMañana="El evento comienza mañana";
+        mensajeMismoDia="";
 
         //dia de hoy igual al dia del comienxzo e igual al dia final y los meses iguales
         if ((startFinalDay == todayFinalDay && endFinalDay == todayFinalDay) && ((startMonth == endMonth)&&(startMonth==todayMonth))) {
@@ -110,10 +127,50 @@ public class DescriptionActivity extends AppCompatActivity {
             //comienza mismo dia termina otro
         } else if ((startFinalDay == todayFinalDay && endFinalDay != todayFinalDay)&&(startMonth == todayMonth)) {
             tv_fecha.setText(mensaje3);
+        }else if(startFinalDay==(todayFinalDay+1)){
+            tv_fecha.setText(mensajeMañana);
         }
         else{
-            tv_fecha.setText(mensaje);
+            if((startFinalDay ==endFinalDay)&&(startMonth==endMonth)){
+                tv_fecha.setText(mensajeMismoDia);
+            }else{
+                tv_fecha.setText(mensaje);
+            }
+
         }
+
+        final int finalStartYearName = startYearName;
+        final int finalStartFinalDay = startFinalDay+1;
+        final int finalEndFinalDay = endFinalDay+4;
+
+
+        final Date finalDate = date;
+        final Date finalDate1 = date2;
+        final GregorianCalendar finalC = c;
+        final GregorianCalendar finalC1 = c;
+        b.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent i ;
+
+                i= new Intent(Intent.ACTION_EDIT);
+                i.setType("vnd.android.cursor.item/event");
+
+                i.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, finalC1.getTime() );
+                i.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, 12);
+
+
+                i.putExtra(CalendarContract.Events.TITLE,title);
+                i.putExtra(CalendarContract.Events.DESCRIPTION,m);
+                i.putExtra(CalendarContract.Events.EVENT_LOCATION,lugar);
+                // i.putExtra(CalendarContract.Events.DTSTART, 5);
+                // i.putExtra(CalendarContract.Events.DTEND, 17);
+
+                // i.putExtra(CalendarContract.Events.DTSTART,)
+                startActivity(i);
+            }
+        });
 
 
     }
