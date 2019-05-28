@@ -115,13 +115,13 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
                         }
                         try {
 
-                            evento.setLocation(loca.getString(PLACE));
+                            evento.setPlace(loca.getString(PLACE));
                         } catch (JSONException ex) {
-                            evento.setLocation("Localización no disponible");
+                            evento.setPlace("Localización no disponible");
                         }
                     } catch (JSONException e) {
                         evento.setAddres("");
-                        evento.setLocation("Localización no disponible");
+                        evento.setPlace("Localización no disponible");
                     }
                     JSONArray contHours = null;
                     try {

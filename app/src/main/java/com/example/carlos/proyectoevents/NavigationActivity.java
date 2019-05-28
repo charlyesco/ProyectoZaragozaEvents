@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.Filter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
@@ -26,8 +27,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class NavigationActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,IEventos,SearchView.OnQueryTextListener {
+        implements NavigationView.OnNavigationItemSelectedListener, IEventos, SearchView.OnQueryTextListener {
     ListView listView;
+
+    public static int control = 0;
 
     ProgressBar pb;
     MenuItem searchMenuItem;
@@ -43,8 +46,6 @@ public class NavigationActivity extends AppCompatActivity
         setContentView(R.layout.activity_navigation);
 
 
-
-
         listView = findViewById(R.id.lvitems);
 
         pb = new ProgressBar(NavigationActivity.this);
@@ -52,7 +53,6 @@ public class NavigationActivity extends AppCompatActivity
         pb.setVisibility(View.VISIBLE);
 
         pb.setProgress(0);
-
 
 
         EventosAsyncTask eat = new EventosAsyncTask(contrato);
@@ -69,8 +69,10 @@ public class NavigationActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
         listView.setTextFilterEnabled(true);
-        adaptadorFiltro = new AdaptadorFiltro(NavigationActivity.this,datos);
+        adaptadorFiltro = new AdaptadorFiltro(NavigationActivity.this, datos);
 
         listView.setAdapter(adaptadorFiltro);
 
@@ -78,21 +80,16 @@ public class NavigationActivity extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Evento e = datos.get(position);
-                Intent intento = new Intent(NavigationActivity.this,DescriptionActivity.class);
+                Intent intento = new Intent(NavigationActivity.this, DescriptionActivity.class);
                 intento.putExtra(EventosAsyncTask.TITLE, e.getTitleEvent().toString());
                 intento.putExtra(EventosAsyncTask.DESCRIPTION, e.getDescription().toString());
                 intento.putExtra(EventosAsyncTask.STREET, e.getAddres().toString());
                 intento.putExtra(EventosAsyncTask.TITLE_CATEGORY, e.getTitleCategory().toString());
-                intento.putExtra(EventosAsyncTask.STARTDATE,e.getStartDate().toString());
-                intento.putExtra(EventosAsyncTask.ENDDATE,e.getEndDate());
+                intento.putExtra(EventosAsyncTask.STARTDATE, e.getStartDate().toString());
+                intento.putExtra(EventosAsyncTask.ENDDATE, e.getEndDate());
                 startActivity(intento);
             }
         });
-
-
-
-
-
 
 
     }
@@ -112,15 +109,27 @@ public class NavigationActivity extends AppCompatActivity
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.navigation, menu);
 
+
         SearchManager searchManager = (SearchManager)
                 getSystemService(Context.SEARCH_SERVICE);
         searchMenuItem = menu.findItem(R.id.busqueda);
         searchView = (SearchView) searchMenuItem.getActionView();
 
+
+
         searchView.setSearchableInfo(searchManager.
                 getSearchableInfo(getComponentName()));
         searchView.setSubmitButtonEnabled(true);
         searchView.setOnQueryTextListener(this);
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                searchView.setQueryHint("Escribir evento...");
+                control=0;
+                return false;
+            }
+        });
+
         return true;
     }
 
@@ -144,20 +153,34 @@ public class NavigationActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        if (id == R.id.buscar) {
-
+        if (id == R.id.lugar) {
+            searchView.setIconifiedByDefault(true);
+            searchView.setFocusable(true);
+            searchView.setIconified(false);
+            searchView.requestFocusFromTouch();
+            control = 1;
+            searchView.setQueryHint("Escribir lugar...");
+        } else if (id == R.id.tema) {
+            searchView.setIconifiedByDefault(true);
+            searchView.setFocusable(true);
+            searchView.setIconified(false);
+            searchView.requestFocusFromTouch();
+            searchView.setQueryHint("Escribir tema...");
+            control = 2;
         } else if (id == R.id.licencias) {
 
         } else if (id == R.id.nosotros) {
 
-        }else if(id== R.id.contacto){
+        } else if (id == R.id.contacto) {
 
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
         return true;
     }
+
     @Override
     public void mostarEvento(Evento evento) {
         datos.add(evento);
@@ -167,13 +190,15 @@ public class NavigationActivity extends AppCompatActivity
         }
 
     }
-    @Override
-    public boolean onQueryTextChange(String newText)
-    {
 
-       if (TextUtils.isEmpty(newText)) {
+    @Override
+    public boolean onQueryTextChange(String newText) {
+
+        if (TextUtils.isEmpty(newText)) {
             listView.clearTextFilter();
-       } else {
+            control = 0;
+            searchView.setQueryHint("Escribir evento...");
+        } else {
 
             listView.setFilterText(newText);
         }
@@ -181,8 +206,8 @@ public class NavigationActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onQueryTextSubmit(String query)
-    {
+    public boolean onQueryTextSubmit(String query) {
         return false;
     }
+
 }

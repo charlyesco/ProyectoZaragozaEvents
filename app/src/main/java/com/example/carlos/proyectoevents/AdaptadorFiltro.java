@@ -1,7 +1,6 @@
 package com.example.carlos.proyectoevents;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,9 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
+
 
 public class AdaptadorFiltro extends BaseAdapter implements Filterable {
     Context context;
@@ -84,13 +85,32 @@ public class AdaptadorFiltro extends BaseAdapter implements Filterable {
                 if (constraint != null) {
                     if (origi != null && origi.size() > 0) {
                         for (final Evento g : origi) {
-                            if (g.getTitleEvent().toLowerCase()
-                                    .contains(constraint.toString()))
-                                results.add(g);
+                           if(NavigationActivity.control==0) {
+                               String comparar=g.getTitleEvent().toLowerCase();
+                               String comparar2= Normalizer.normalize(comparar, Normalizer.Form.NFD);;
+                               comparar2= comparar2.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+
+                               if (comparar2.contains(constraint.toString()))
+                                   results.add(g);
+
+                           }else if(NavigationActivity.control==1){
+                               String c=g.getAddres().toLowerCase();
+                               String c2=Normalizer.normalize(c, Normalizer.Form.NFD);
+                               c2 = c2.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+                               if (c2.contains(constraint.toString()))
+                                   results.add(g);
+                           }else if(NavigationActivity.control==2){
+                               String a= g.getTitleCategory().toLowerCase();
+                               String b=Normalizer.normalize(a, Normalizer.Form.NFD);
+                               b = b.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+                               if (b.contains(constraint.toString()))
+                                   results.add(g);
+                           }
                         }
                     }
                     oReturn.values = results;
                 }
+
                 return oReturn;
             }
 
@@ -103,7 +123,6 @@ public class AdaptadorFiltro extends BaseAdapter implements Filterable {
             }
         };
     }
-
 
     public class ViewHolder{
         //   TextView icon;

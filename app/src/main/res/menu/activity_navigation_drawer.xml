@@ -4,24 +4,44 @@
     tools:showIn="navigation_view">
 
 
+    <item android:title="Busqueda">
+    <menu>
+        <group android:checkableBehavior="single">
+            <item
+                android:id="@+id/tema"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="Tema" />
+            <item
+                android:id="@+id/lugar"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Lugar" />
+
+
+
+        </group>
+
+    </menu>
+</item>
+
     <item android:title="Opciones">
         <menu>
-            <item
-                android:id="@+id/buscar"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Busqueda" />
-            <item
-                android:id="@+id/nosotros"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Nosotros" />
-            <item
-                android:id="@+id/contacto"
-                android:icon="@drawable/ic_menu_manage"
-                android:title="Contacto" />
-            <item
-                android:id="@+id/licencias"
-                android:icon="@drawable/ic_menu_manage"
-                android:title="Licencias y Términos" />
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nosotros"
+                    android:icon="@drawable/ic_menu_manage"
+                    android:title="Nosotros" />
+                <item
+                    android:id="@+id/contacto"
+                    android:icon="@drawable/ic_menu_manage"
+                    android:title="Contacto" />
+
+                <item
+                    android:id="@+id/licencias"
+                    android:icon="@drawable/ic_menu_manage"
+                    android:title="Licencias y Términos" />
+
+            </group>
+
         </menu>
     </item>
 
