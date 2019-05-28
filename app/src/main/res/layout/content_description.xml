@@ -2,11 +2,13 @@
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nestedScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".DescriptionActivity"
     tools:showIn="@layout/activity_description">
+
     <android.support.constraint.ConstraintLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -19,61 +21,67 @@
             android:id="@+id/imageView"
             android:layout_width="101dp"
             android:layout_height="100dp"
-            android:layout_marginStart="36dp"
-            android:layout_marginLeft="36dp"
-            android:layout_marginTop="44dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginLeft="28dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="8dp"
             android:src="@mipmap/ic_launcher"
+            app:layout_constraintBottom_toTopOf="@+id/tv_desc_street"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/tv_desc_title"
-            android:layout_width="215dp"
-            android:layout_height="97dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="64dp"
+            android:id="@+id/tv_desc_street"
+            android:layout_width="347dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginLeft="28dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:text="Title"
+            android:text="Street"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.185"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_desc_category"
             tools:maxWidth="200dp" />
 
         <TextView
             android:id="@+id/tv_desc_lugar"
-            android:layout_width="232dp"
-            android:layout_height="44dp"
+            android:layout_width="207dp"
+            android:layout_height="41dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
             android:maxWidth="340dp"
             android:text="Ubicación"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.166"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintHorizontal_bias="0.674"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/bt_desc_anadir" />
 
         <TextView
             android:id="@+id/tv_desc_category"
-            android:layout_width="294dp"
-            android:layout_height="22dp"
-            android:layout_marginStart="36dp"
-            android:layout_marginLeft="36dp"
+            android:layout_width="204dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="12dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginRight="28dp"
             android:scrollbars="vertical"
             android:text="Tema"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.761"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toBottomOf="@+id/tv_desc_lugar" />
 
         <TextView
             android:id="@+id/tv_desc_desc"
-            android:layout_width="322dp"
-            android:layout_height="215dp"
+            android:layout_width="337dp"
+            android:layout_height="199dp"
             android:layout_marginStart="36dp"
             android:layout_marginLeft="36dp"
             android:layout_marginTop="24dp"
@@ -90,38 +98,35 @@
 
         <TextView
             android:id="@+id/tv_desc_fecha"
-            android:layout_width="325dp"
-            android:layout_height="81dp"
+            android:layout_width="343dp"
+            android:layout_height="71dp"
             android:layout_marginStart="32dp"
             android:layout_marginLeft="32dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:text="Fecha"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.052"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_desc_category" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_desc_street" />
 
         <ImageButton
             android:id="@+id/bt_desc_anadir"
-            android:layout_width="45dp"
-            android:layout_height="52dp"
+            android:layout_width="52dp"
+            android:layout_height="50dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="52dp"
             android:layout_marginRight="52dp"
-            android:layout_marginBottom="8dp"
             android:background="@color/common_google_signin_btn_text_dark_default"
             android:src="@drawable/calendario"
             android:text=""
-            app:layout_constraintBottom_toTopOf="@+id/tv_desc_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </android.support.constraint.ConstraintLayout>

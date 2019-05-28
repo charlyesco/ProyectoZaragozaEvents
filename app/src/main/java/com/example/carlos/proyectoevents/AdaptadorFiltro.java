@@ -62,7 +62,7 @@ public class AdaptadorFiltro extends BaseAdapter implements Filterable {
         }
         holder.titulo.setText(listaEventos.get(position).getTitleEvent());
         holder.tema.setText(listaEventos.get(position).getTitleCategory());
-        holder.lugar.setText(listaEventos.get(position).getAddres());
+        holder.lugar.setText(listaEventos.get(position).getPlace());
 
         return view;
 

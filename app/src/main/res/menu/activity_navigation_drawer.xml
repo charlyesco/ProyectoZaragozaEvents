@@ -27,7 +27,7 @@
         <menu>
             <group android:checkableBehavior="single">
                 <item
-                    android:id="@+id/nosotros"
+                    android:id="@+id/preguntas"
                     android:icon="@drawable/ic_menu_manage"
                     android:title="Nosotros" />
                 <item

@@ -81,7 +81,7 @@ public class NavigationActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Evento e = datos.get(position);
                 Intent intento = new Intent(NavigationActivity.this, DescriptionActivity.class);
-                intento.putExtra(EventosAsyncTask.TITLE, e.getTitleEvent().toString());
+                intento.putExtra(EventosAsyncTask.PLACE, e.getPlace().toString());
                 intento.putExtra(EventosAsyncTask.DESCRIPTION, e.getDescription().toString());
                 intento.putExtra(EventosAsyncTask.STREET, e.getAddres().toString());
                 intento.putExtra(EventosAsyncTask.TITLE_CATEGORY, e.getTitleCategory().toString());
@@ -169,7 +169,9 @@ public class NavigationActivity extends AppCompatActivity
             control = 2;
         } else if (id == R.id.licencias) {
 
-        } else if (id == R.id.nosotros) {
+        } else if (id == R.id.preguntas) {
+            Intent i= new Intent(NavigationActivity.this, NosotrosActivity.class);
+            startActivity(i);
 
         } else if (id == R.id.contacto) {
 
