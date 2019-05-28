@@ -27,14 +27,13 @@
         <menu>
             <group android:checkableBehavior="single">
                 <item
-                    android:id="@+id/preguntas"
-                    android:icon="@drawable/ic_menu_manage"
-                    android:title="Nosotros" />
-                <item
                     android:id="@+id/contacto"
                     android:icon="@drawable/ic_menu_manage"
                     android:title="Contacto" />
-
+                <item
+                    android:id="@+id/preguntas"
+                    android:icon="@drawable/ic_menu_manage"
+                    android:title="Preguntas Frecuentes" />
                 <item
                     android:id="@+id/licencias"
                     android:icon="@drawable/ic_menu_manage"
