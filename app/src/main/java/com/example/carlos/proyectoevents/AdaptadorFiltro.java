@@ -94,7 +94,7 @@ public class AdaptadorFiltro extends BaseAdapter implements Filterable {
                                    results.add(g);
 
                            }else if(NavigationActivity.control==1){
-                               String c=g.getAddres().toLowerCase();
+                               String c=g.getPlace().toLowerCase();
                                String c2=Normalizer.normalize(c, Normalizer.Form.NFD);
                                c2 = c2.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
                                if (c2.contains(constraint.toString()))

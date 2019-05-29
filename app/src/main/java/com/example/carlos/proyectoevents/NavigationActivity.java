@@ -114,8 +114,9 @@ public class NavigationActivity extends AppCompatActivity
         SearchManager searchManager = (SearchManager)
                 getSystemService(Context.SEARCH_SERVICE);
         searchMenuItem = menu.findItem(R.id.busqueda);
-        searchView = (SearchView) searchMenuItem.getActionView();
 
+        searchView = (SearchView) searchMenuItem.getActionView();
+        searchView.setQueryHint("Escribir evento...");
 
 
         searchView.setSearchableInfo(searchManager.
