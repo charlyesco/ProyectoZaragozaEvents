@@ -40,6 +40,7 @@ public class NavigationActivity extends AppCompatActivity
     SearchView searchView;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -215,5 +216,7 @@ public class NavigationActivity extends AppCompatActivity
     public boolean onQueryTextSubmit(String query) {
         return false;
     }
+
+
 
 }

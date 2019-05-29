@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.Normalizer;
@@ -15,14 +16,14 @@ import java.util.ArrayList;
 
 public class AdaptadorFiltro extends BaseAdapter implements Filterable {
     Context context;
-    ArrayList<Evento>listaEventos;
+    ArrayList<Evento> listaEventos;
     ArrayList<Evento> origi;
 
 
-    public AdaptadorFiltro(Context c,ArrayList<Evento>listaEventos){
+    public AdaptadorFiltro(Context c, ArrayList<Evento> listaEventos) {
         super();
-        this.context=c;
-        this.listaEventos=listaEventos;
+        this.context = c;
+        this.listaEventos = listaEventos;
 
     }
 
@@ -46,34 +47,38 @@ public class AdaptadorFiltro extends BaseAdapter implements Filterable {
     public View getView(int position, View view, ViewGroup parent) {
         ViewHolder holder;
 
-        if(view==null){
+        if (view == null) {
 
 
-            view=  LayoutInflater.from(context).inflate(R.layout.item,null);
-            holder=new ViewHolder();
-            holder.titulo=view.findViewById(R.id.item_tv_title);
-            holder.tema=view.findViewById(R.id.item_tv_theme);
-            holder.lugar=view.findViewById(R.id.item_tv_lugar);
-            // holder.icon=view.findViewById(R.id.item_image);
+            view = LayoutInflater.from(context).inflate(R.layout.item, null);
+            holder = new ViewHolder();
+            holder.titulo = view.findViewById(R.id.item_tv_title);
+            holder.tema = view.findViewById(R.id.item_tv_theme);
+            holder.lugar = view.findViewById(R.id.item_tv_lugar);
+            ImageView image = view.findViewById(R.id.image_theme);
+            holder.i = asignarImagen(image, listaEventos.get(position).getTitleCategory());
+
 
             view.setTag(holder);
-        }else{
-            holder= (ViewHolder) view.getTag();
+        } else {
+            holder = (ViewHolder) view.getTag();
         }
         holder.titulo.setText(listaEventos.get(position).getTitleEvent());
         holder.tema.setText(listaEventos.get(position).getTitleCategory());
         holder.lugar.setText(listaEventos.get(position).getPlace());
-
+        ImageView image = view.findViewById(R.id.image_theme);
+        holder.i = asignarImagen(image, listaEventos.get(position).getTitleCategory());
         return view;
 
 
     }
+
     public void notifyDataSetChanged() {
         super.notifyDataSetChanged();
     }
 
     @Override
-    public  Filter getFilter() {
+    public Filter getFilter() {
         return new Filter() {
 
             @Override
@@ -85,27 +90,28 @@ public class AdaptadorFiltro extends BaseAdapter implements Filterable {
                 if (constraint != null) {
                     if (origi != null && origi.size() > 0) {
                         for (final Evento g : origi) {
-                           if(NavigationActivity.control==0) {
-                               String comparar=g.getTitleEvent().toLowerCase();
-                               String comparar2= Normalizer.normalize(comparar, Normalizer.Form.NFD);;
-                               comparar2= comparar2.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+                            if (NavigationActivity.control == 0) {
+                                String comparar = g.getTitleEvent().toLowerCase();
+                                String comparar2 = Normalizer.normalize(comparar, Normalizer.Form.NFD);
+                                ;
+                                comparar2 = comparar2.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
 
-                               if (comparar2.contains(constraint.toString()))
-                                   results.add(g);
+                                if (comparar2.contains(constraint.toString()))
+                                    results.add(g);
 
-                           }else if(NavigationActivity.control==1){
-                               String c=g.getPlace().toLowerCase();
-                               String c2=Normalizer.normalize(c, Normalizer.Form.NFD);
-                               c2 = c2.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
-                               if (c2.contains(constraint.toString()))
-                                   results.add(g);
-                           }else if(NavigationActivity.control==2){
-                               String a= g.getTitleCategory().toLowerCase();
-                               String b=Normalizer.normalize(a, Normalizer.Form.NFD);
-                               b = b.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
-                               if (b.contains(constraint.toString()))
-                                   results.add(g);
-                           }
+                            } else if (NavigationActivity.control == 1) {
+                                String c = g.getPlace().toLowerCase();
+                                String c2 = Normalizer.normalize(c, Normalizer.Form.NFD);
+                                c2 = c2.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+                                if (c2.contains(constraint.toString()))
+                                    results.add(g);
+                            } else if (NavigationActivity.control == 2) {
+                                String a = g.getTitleCategory().toLowerCase();
+                                String b = Normalizer.normalize(a, Normalizer.Form.NFD);
+                                b = b.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+                                if (b.contains(constraint.toString()))
+                                    results.add(g);
+                            }
                         }
                     }
                     oReturn.values = results;
@@ -124,8 +130,38 @@ public class AdaptadorFiltro extends BaseAdapter implements Filterable {
         };
     }
 
-    public class ViewHolder{
-        //   TextView icon;
+    public static ImageView asignarImagen(ImageView i, String tema) {
+
+        String b = Normalizer.normalize(tema, Normalizer.Form.NFD).toLowerCase();
+        b = b.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+
+        if (b.equals("conferencias y congresos")) {
+            i.setImageResource(R.drawable.conferencias);
+
+        } else if (b.equals("artes plasticas")) {
+            i.setImageResource(R.drawable.artes_plasticas);
+        } else if (b.equals("musica")) {
+            i.setImageResource(R.drawable.musica);
+        } else if (b.equals("deporte")) {
+            i.setImageResource(R.drawable.deporte);
+        } else if (b.equals("ocio y juegos")) {
+            i.setImageResource(R.drawable.ocio);
+        } else if (b.equals("cine")) {
+            i.setImageResource(R.drawable.cine);
+        } else if (b.equals("otros")) {
+            i.setImageResource(R.drawable.otros);
+        } else if (b.equals("gastronomia")) {
+            i.setImageResource(R.drawable.gastronomia);
+        }else{
+            i.setImageResource(R.drawable.cine);
+        }
+
+
+        return i;
+    }
+
+    public class ViewHolder {
+        ImageView i;
         TextView titulo;
         TextView tema;
         TextView lugar;

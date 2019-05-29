@@ -8,59 +8,70 @@
 
     <TextView
         android:id="@+id/item_tv_title"
-        android:layout_width="212dp"
-        android:layout_height="34dp"
+        android:layout_width="183dp"
+        android:layout_height="35dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="TextView"
+        android:text="title"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.296"
+        app:layout_constraintHorizontal_bias="0.121"
         app:layout_constraintStart_toEndOf="@+id/item_image"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/item_image"
-        android:layout_width="124dp"
-        android:layout_height="134dp"
+        android:layout_width="129dp"
+        android:layout_height="131dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
+        android:src="@mipmap/ic_launcher"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.041"
-        tools:srcCompat="@tools:sample/avatars[3]"
-        android:src="@mipmap/ic_launcher"/>
+        tools:srcCompat="@tools:sample/avatars[3]" />
 
     <TextView
         android:id="@+id/item_tv_lugar"
-        android:layout_width="211dp"
-        android:layout_height="44dp"
+        android:layout_width="180dp"
+        android:layout_height="37dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="TextView"
+        android:text="lugar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.312"
+        app:layout_constraintHorizontal_bias="0.133"
         app:layout_constraintStart_toEndOf="@+id/item_image"
         app:layout_constraintTop_toBottomOf="@+id/item_tv_title" />
 
     <TextView
         android:id="@+id/item_tv_theme"
-        android:layout_width="210dp"
-        android:layout_height="30dp"
+        android:layout_width="147dp"
+        android:layout_height="45dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
-        android:text="TextView"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:text="tema"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.283"
-        app:layout_constraintStart_toEndOf="@+id/item_image"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/image_theme"
         app:layout_constraintTop_toBottomOf="@+id/item_tv_lugar" />
+
+    <ImageView
+        android:id="@+id/image_theme"
+        android:layout_width="60dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toEndOf="@+id/item_image"
+        app:layout_constraintTop_toBottomOf="@+id/item_tv_lugar"
+        app:srcCompat="@drawable/cine" />
 </android.support.constraint.ConstraintLayout>
