@@ -1,6 +1,7 @@
 package com.example.carlos.proyectoevents;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -152,7 +153,37 @@ public class AdaptadorFiltro extends BaseAdapter implements Filterable {
             i.setImageResource(R.drawable.otros);
         } else if (b.equals("gastronomia")) {
             i.setImageResource(R.drawable.gastronomia);
-        }else{
+        } else if (b.equals("cursos y talleres")) {
+            i.setImageResource(R.drawable.cursos_talleres);
+        } else if (b.equals("imagen y sonido")) {
+            i.setImageResource(R.drawable.imagen_sonido);
+        } else if (b.equals("cine")) {
+            i.setImageResource(R.drawable.cine);
+        } else if (b.equals("otros")) {
+            i.setImageResource(R.drawable.otros);
+        } else if (b.equals("visitas turisticas")) {
+            i.setImageResource(R.drawable.actividades_turisticas);
+        }
+        else if (b.equals("ciencia y tecnologia")) {
+            i.setImageResource(R.drawable.ciencia);
+        }
+        else if (b.equals("exposiciones")) {
+            i.setImageResource(R.drawable.picture);
+        }
+        else if (b.equals("actividades vacacionales")) {
+            i.setImageResource(R.drawable.vacacionales);
+        }
+        else if (b.equals("teatro y artes escenicas")) {
+            i.setImageResource(R.drawable.teatro);
+        }else if (b.equals("turismo")) {
+            i.setImageResource(R.drawable.turismo);
+        }else if (b.equals("formacion")) {
+            i.setImageResource(R.drawable.formacion);
+        }else if (b.equals("ferias y fiestas")) {
+            i.setImageResource(R.drawable.fiestas);
+        }
+
+        else {
             i.setImageResource(R.drawable.cine);
         }
 
