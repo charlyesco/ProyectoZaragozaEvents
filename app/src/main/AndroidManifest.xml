@@ -17,7 +17,12 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ContactoActivity"></activity>
+        <activity
+            android:name=".InfoActivity"
+            android:label=""></activity>
+        <activity
+            android:name=".ContactoActivity"
+            android:label="" />
         <activity android:name=".NosotrosActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

@@ -40,7 +40,6 @@ public class NavigationActivity extends AppCompatActivity
     SearchView searchView;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,11 +88,13 @@ public class NavigationActivity extends AppCompatActivity
                 intento.putExtra(EventosAsyncTask.STARTDATE, e.getStartDate().toString());
                 intento.putExtra(EventosAsyncTask.ENDDATE, e.getEndDate());
                 intento.putExtra(EventosAsyncTask.TITLE, e.getTitleEvent().toString());
-                intento.putExtra(EventosAsyncTask.HORARIO,e.getHorario().toString());
+                intento.putExtra(EventosAsyncTask.HORARIO, e.getHorario().toString());
                 startActivity(intento);
             }
         });
-
+        if (listView.getCount() > 0) {
+            pb.setVisibility(View.INVISIBLE);
+        }
 
     }
 
@@ -129,7 +130,7 @@ public class NavigationActivity extends AppCompatActivity
             @Override
             public boolean onClose() {
                 searchView.setQueryHint("Escribir evento...");
-                control=0;
+                control = 0;
                 return false;
             }
         });
@@ -171,14 +172,15 @@ public class NavigationActivity extends AppCompatActivity
             searchView.requestFocusFromTouch();
             searchView.setQueryHint("Escribir tema...");
             control = 2;
-        } else if (id == R.id.licencias) {
-
+        } else if (id == R.id.info) {
+            Intent i = new Intent(NavigationActivity.this, InfoActivity.class);
+            startActivity(i);
         } else if (id == R.id.preguntas) {
-            Intent i= new Intent(NavigationActivity.this, NosotrosActivity.class);
+            Intent i = new Intent(NavigationActivity.this, NosotrosActivity.class);
             startActivity(i);
 
         } else if (id == R.id.contacto) {
-            Intent i= new Intent(NavigationActivity.this, ContactoActivity.class);
+            Intent i = new Intent(NavigationActivity.this, ContactoActivity.class);
             startActivity(i);
         }
 
@@ -216,7 +218,6 @@ public class NavigationActivity extends AppCompatActivity
     public boolean onQueryTextSubmit(String query) {
         return false;
     }
-
 
 
 }

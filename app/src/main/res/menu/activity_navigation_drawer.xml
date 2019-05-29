@@ -35,9 +35,9 @@
                     android:icon="@drawable/ic_menu_manage"
                     android:title="Preguntas Frecuentes" />
                 <item
-                    android:id="@+id/licencias"
+                    android:id="@+id/info"
                     android:icon="@drawable/ic_menu_manage"
-                    android:title="Licencias y Términos" />
+                    android:title="Info App" />
 
             </group>
 
