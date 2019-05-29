@@ -57,7 +57,7 @@ public class DescriptionActivity extends AppCompatActivity {
 
         String mHtmlString = "&lt;p class=&quot;MsoNormal&quot; style=&quot;margin-bottom:10.5pt;text-align:justify;line-height: 10.5pt&quot;&gt;&lt;b&gt;&lt;span style=&quot;font-size: 8.5pt; font-family: Arial, sans-serif;&quot;&gt;Lorem Ipsum&lt;/span&gt;&lt;/b&gt;&lt;span style=&quot;font-size: 8.5pt; font-family: Arial, sans-serif;&quot;&gt;&amp;nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.&lt;o:p&gt;&lt;/o:p&gt;&lt;/span&gt;&lt;/p&gt; &lt;p class=&quot;MsoNormal&quot; style=&quot;margin-bottom: 0.0001pt;&quot;&gt;&lt;span style=&quot;font-size: 8.5pt; font-family: Arial, sans-serif;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-family: Arial, sans-serif; font-size: 8.5pt; line-height: 10.5pt; text-align: justify;&quot;&gt;Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, &quot;Lorem ipsum dolor sit amet..&quot;, comes from a line in section 1.10.32.&lt;/span&gt;&lt;/p&gt;";
 
-        TextView tv_street, tv_desc, tv_lugar, tv_category, tv_fecha;
+        TextView tv_street, tv_desc, tv_lugar, tv_category, tv_fecha,tv_horario;
         tv_category = findViewById(R.id.tv_desc_category);
 
         //este he cambiado
@@ -66,6 +66,7 @@ public class DescriptionActivity extends AppCompatActivity {
         //aqui recibe la direccion
         tv_lugar = findViewById(R.id.tv_desc_lugar);
         tv_fecha = findViewById(R.id.tv_desc_fecha);
+        tv_horario=findViewById(R.id.tv_desc_horario);
 
         tv_desc.setMovementMethod(new ScrollingMovementMethod());
 
@@ -114,6 +115,7 @@ public class DescriptionActivity extends AppCompatActivity {
         tv_street.setText(extras.getString(EventosAsyncTask.STREET));
         // tv_desc.setText(extras.getString(EventosAsyncTask.DESCRIPTION));
         tv_lugar.setText(extras.getString(EventosAsyncTask.PLACE_TITLE));
+        tv_horario.setText(extras.getString(EventosAsyncTask.HORARIO));
 
 
         tv_desc.setText(Html.fromHtml(Html.fromHtml(extras.getString(EventosAsyncTask.DESCRIPTION)).toString()));

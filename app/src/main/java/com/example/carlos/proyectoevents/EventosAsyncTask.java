@@ -32,6 +32,7 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
     public static final String ENDHOUR = "endtTime";
     public static final String OPENHOUR = "openingHours";
     public static final String DAYWEEK = "dayOfWeek";
+    public static final String HORARIO = "horario";
     public static final String GEOMETRY = "geometry";
     public static final String COORDINANTES = "coordinates";
     public static final int COORD0 = 0;

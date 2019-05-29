@@ -88,6 +88,7 @@ public class NavigationActivity extends AppCompatActivity
                 intento.putExtra(EventosAsyncTask.STARTDATE, e.getStartDate().toString());
                 intento.putExtra(EventosAsyncTask.ENDDATE, e.getEndDate());
                 intento.putExtra(EventosAsyncTask.TITLE, e.getTitleEvent().toString());
+                intento.putExtra(EventosAsyncTask.HORARIO,e.getHorario().toString());
                 startActivity(intento);
             }
         });
