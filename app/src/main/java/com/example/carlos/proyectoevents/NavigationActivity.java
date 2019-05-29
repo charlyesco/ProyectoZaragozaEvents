@@ -31,6 +31,7 @@ public class NavigationActivity extends AppCompatActivity
     ListView listView;
     private static final int INTERVALO = 1500; //2 segundos para salir
     private long tiempoPrimerClick;
+    private static int log=0;
 
     public static int control = 0;
 

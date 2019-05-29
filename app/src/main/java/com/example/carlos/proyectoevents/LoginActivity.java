@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText et_password;
     private Button b,b_inicio;
     private ProgressDialog pd;
+    private TextView olvido;
 
     //declaramos un objecto de FirebaseAuth
     private FirebaseAuth firebaseAuth;
@@ -42,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         b = findViewById(R.id.bt_registrarse);
         b_inicio=findViewById(R.id.bt_iniciar2);
         pd = new ProgressDialog(this);
+        olvido=findViewById(R.id.tv_olvido);
 
         b.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +57,14 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loginUsuario();
+            }
+        });
+
+        olvido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(LoginActivity.this,PasswordActivity.class);
+                startActivity(i);
             }
         });
     }
