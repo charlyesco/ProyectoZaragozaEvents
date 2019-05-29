@@ -24,7 +24,7 @@ public class InicioActivity extends AppCompatActivity {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intento=new Intent(InicioActivity.this,NavigationActivity.class);
+                Intent intento=new Intent(InicioActivity.this,LoginActivity.class);
                 startActivity(intento);
             }
         });
