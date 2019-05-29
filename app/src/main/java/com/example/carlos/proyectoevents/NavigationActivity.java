@@ -81,12 +81,13 @@ public class NavigationActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Evento e = datos.get(position);
                 Intent intento = new Intent(NavigationActivity.this, DescriptionActivity.class);
-                intento.putExtra(EventosAsyncTask.PLACE, e.getPlace().toString());
+                intento.putExtra(EventosAsyncTask.PLACE_TITLE, e.getPlace().toString());
                 intento.putExtra(EventosAsyncTask.DESCRIPTION, e.getDescription().toString());
                 intento.putExtra(EventosAsyncTask.STREET, e.getAddres().toString());
                 intento.putExtra(EventosAsyncTask.TITLE_CATEGORY, e.getTitleCategory().toString());
                 intento.putExtra(EventosAsyncTask.STARTDATE, e.getStartDate().toString());
                 intento.putExtra(EventosAsyncTask.ENDDATE, e.getEndDate());
+                intento.putExtra(EventosAsyncTask.TITLE, e.getTitleEvent().toString());
                 startActivity(intento);
             }
         });

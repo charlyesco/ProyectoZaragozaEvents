@@ -4,7 +4,7 @@ package com.example.carlos.proyectoevents;
 public class Evento {
     private String id;
     private String titleEvent;
-    private String place;
+    private String place_title;
     private String addres;
     private String region;
     private String telefono;
@@ -66,11 +66,11 @@ public class Evento {
         this.region = region;
     }
     public String getPlace() {
-        return place;
+        return place_title;
     }
 
     public void setPlace(String location) {
-        this.place = location;
+        this.place_title = location;
     }
 
     public String getAddres() {

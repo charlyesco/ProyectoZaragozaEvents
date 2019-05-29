@@ -47,7 +47,6 @@ public class DescriptionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_description);
 
         title = extras.getString(EventosAsyncTask.TITLE);
-        titlePlace=extras.getString(EventosAsyncTask.PLACE);
         final String des=extras.getString(EventosAsyncTask.DESCRIPTION),cat=extras.getString(EventosAsyncTask.TITLE_CATEGORY),lugar=extras.getString(EventosAsyncTask.STREET);
         final String m= Html.fromHtml(extras.getString(EventosAsyncTask.DESCRIPTION), Html.FROM_HTML_MODE_LEGACY).toString();
 
@@ -114,7 +113,7 @@ public class DescriptionActivity extends AppCompatActivity {
         tv_category.setText(extras.getString(EventosAsyncTask.TITLE_CATEGORY));
         tv_street.setText(extras.getString(EventosAsyncTask.STREET));
         // tv_desc.setText(extras.getString(EventosAsyncTask.DESCRIPTION));
-        tv_lugar.setText(extras.getString(EventosAsyncTask.PLACE));
+        tv_lugar.setText(extras.getString(EventosAsyncTask.PLACE_TITLE));
 
 
         tv_desc.setText(Html.fromHtml(Html.fromHtml(extras.getString(EventosAsyncTask.DESCRIPTION)).toString()));

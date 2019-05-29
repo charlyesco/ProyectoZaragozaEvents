@@ -23,7 +23,7 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
     public static final String lOCATIONS = "location";
     public static final String CATEGORY = "category";
     public static final String TITLE_CATEGORY = "titleCategory";
-    public static final String PLACE = "title";
+    public static final String PLACE_TITLE = "place_title";
     //FECHAS
     public static final String STARTDATE = "startDate";
     public static final String ENDDATE = "endDate";
@@ -115,7 +115,7 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
                         }
                         try {
 
-                            evento.setPlace(loca.getString(PLACE));
+                            evento.setPlace(loca.getString(TITLE));
                         } catch (JSONException ex) {
                             evento.setPlace("Localización no disponible");
                         }
