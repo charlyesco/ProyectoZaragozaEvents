@@ -3,9 +3,11 @@ package com.example.carlos.proyectoevents;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -31,7 +33,7 @@ public class NavigationActivity extends AppCompatActivity
     ListView listView;
     private static final int INTERVALO = 1500; //2 segundos para salir
     private long tiempoPrimerClick;
-    private static int log=0;
+    public static int login = 0;
 
     public static int control = 0;
 
@@ -41,6 +43,7 @@ public class NavigationActivity extends AppCompatActivity
     AdaptadorFiltro adaptadorFiltro;
     ArrayList<Evento> datos = new ArrayList<Evento>();
     SearchView searchView;
+    MenuItem sesion;
 
 
     @Override
@@ -107,23 +110,41 @@ public class NavigationActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-           if(tiempoPrimerClick + INTERVALO > System.currentTimeMillis() ) {
-               super.onBackPressed();
-               Intent i = new Intent(NavigationActivity.this, InicioActivity.class);
-               startActivity(i);
-           }else{
-               Toast.makeText(this, "Vuelve a presionar para salir", Toast.LENGTH_SHORT).show();
+            if (tiempoPrimerClick + INTERVALO > System.currentTimeMillis()) {
+                super.onBackPressed();
+                login=0;
+                Intent i = new Intent(NavigationActivity.this, InicioActivity.class);
+                startActivity(i);
+            } else {
+                Toast.makeText(this, "Vuelve a presionar para salir", Toast.LENGTH_SHORT).show();
 
-           }
+            }
         }
         tiempoPrimerClick = System.currentTimeMillis();
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(final Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.navigation, menu);
-
+        sesion=menu.findItem(R.id.icono);
+        if(login==0){
+            sesion.setIcon(ContextCompat.getDrawable(this, R.drawable.otros));
+        }else{
+            sesion.setIcon(ContextCompat.getDrawable(this, R.drawable.imagen_sonido));
+        }
+        sesion.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if(login==0){
+                    MenuItem m=menu.findItem(R.id.action_settings);
+                    m.setVisible(false);
+                }else if(login==1){
+                    MenuItem m=menu.findItem(R.id.action_settings);
+                    m.setVisible(true);
+                }return true;
+            }
+        });
 
         SearchManager searchManager = (SearchManager)
                 getSystemService(Context.SEARCH_SERVICE);
@@ -151,16 +172,20 @@ public class NavigationActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        //1 quiere decir que ha iniciado conexion
+        if (login > 0) {
+            if (id == R.id.action_settings) {
+                login=0;
+              Intent i =new Intent(NavigationActivity.this,InicioActivity.class);
+              startActivity(i);
+            }
         }
+        if(id==R.id.icono){
 
+        }
         return super.onOptionsItemSelected(item);
     }
 

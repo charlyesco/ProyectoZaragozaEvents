@@ -131,6 +131,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+                    //asignamos 1 porque hemos iniciado sesion
+                    NavigationActivity.login=1;
                   Intent i=new Intent(LoginActivity.this,NavigationActivity.class);
                   startActivity(i);
                 } else {
