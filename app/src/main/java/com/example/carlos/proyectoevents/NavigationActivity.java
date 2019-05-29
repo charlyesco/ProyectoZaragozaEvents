@@ -177,7 +177,8 @@ public class NavigationActivity extends AppCompatActivity
             startActivity(i);
 
         } else if (id == R.id.contacto) {
-
+            Intent i= new Intent(NavigationActivity.this, ContactoActivity.class);
+            startActivity(i);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
