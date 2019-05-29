@@ -13,20 +13,33 @@ import android.widget.TextView;
 
 public class InicioActivity extends AppCompatActivity {
     Button b;
+    TextView sinLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
 
 
-
+        sinLogin=findViewById(R.id.tv_sin_login);
         b=findViewById(R.id.button_inicio);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intento=new Intent(InicioActivity.this,NavigationActivity.class);
+                Intent intento=new Intent(InicioActivity.this,LoginActivity.class);
                 startActivity(intento);
             }
         });
+
+        sinLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i =new Intent(InicioActivity.this,NavigationActivity.class);
+                startActivity(i);
+            }
+        });
+    }
+    @Override
+    public void onBackPressed() {
+
     }
 }

@@ -29,6 +29,8 @@ import java.util.ArrayList;
 public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, IEventos, SearchView.OnQueryTextListener {
     ListView listView;
+    private static final int INTERVALO = 1500; //2 segundos para salir
+    private long tiempoPrimerClick;
 
     public static int control = 0;
 
@@ -104,8 +106,16 @@ public class NavigationActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+           if(tiempoPrimerClick + INTERVALO > System.currentTimeMillis() ) {
+               super.onBackPressed();
+               Intent i = new Intent(NavigationActivity.this, InicioActivity.class);
+               startActivity(i);
+           }else{
+               Toast.makeText(this, "Vuelve a presionar para salir", Toast.LENGTH_SHORT).show();
+
+           }
         }
+        tiempoPrimerClick = System.currentTimeMillis();
     }
 
     @Override
