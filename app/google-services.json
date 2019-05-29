@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "42158156198",
+    "firebase_url": "https://zaragozaevents-852ae.firebaseio.com",
+    "project_id": "zaragozaevents-852ae",
+    "storage_bucket": "zaragozaevents-852ae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:42158156198:android:68ebfaf34b37dd29",
+        "android_client_info": {
+          "package_name": "com.example.carlos.proyectoevents"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "42158156198-tvd8v3n3dpjf1sbf1qq05iifkuupi9ok.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.carlos.proyectoevents",
+            "certificate_hash": "1b67752c46d3eb190ee8b1d40257548d0b42c560"
+          }
+        },
+        {
+          "client_id": "42158156198-i6hvcp8ujk1to4kmbqfd3c1igq30nc7c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYPYdv7kZDZWtV40VIAU0UAxYSJl42GeQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "42158156198-i6hvcp8ujk1to4kmbqfd3c1igq30nc7c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
