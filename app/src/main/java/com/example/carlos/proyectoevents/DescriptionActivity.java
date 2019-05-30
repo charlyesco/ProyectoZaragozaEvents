@@ -116,7 +116,9 @@ public class DescriptionActivity extends AppCompatActivity {
         // tv_desc.setText(extras.getString(EventosAsyncTask.DESCRIPTION));
         tv_lugar.setText(extras.getString(EventosAsyncTask.PLACE_TITLE));
         tv_horario.setText(extras.getString(EventosAsyncTask.HORARIO));
-
+        //LLegan las coordenadas
+        String c0=extras.getString(EventosAsyncTask.COORD0);
+        String c1=extras.getString(EventosAsyncTask.COORD1);
 
         tv_desc.setText(Html.fromHtml(Html.fromHtml(extras.getString(EventosAsyncTask.DESCRIPTION)).toString()));
 

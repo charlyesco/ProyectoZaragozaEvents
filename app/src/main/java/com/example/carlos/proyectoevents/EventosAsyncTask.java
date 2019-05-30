@@ -35,7 +35,7 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
     public static final String HORARIO = "horario";
     public static final String GEOMETRY = "geometry";
     public static final String COORDINANTES = "coordinates";
-    public static final int COORD0 = 0;
+    public static final String COORD0 = "0";
     public static final String COORD1 = "1";
 
     public EventosAsyncTask(IEventos ievento) {
