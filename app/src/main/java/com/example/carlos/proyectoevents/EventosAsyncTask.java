@@ -164,6 +164,7 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
                         evento.setEndTime("");
                     }
                 }
+
                 //RECOGEMOS EL TEMA DEL EVENTO
                 JSONArray category = contenedor.getJSONArray(CATEGORY);
                 for (int k = 0; k < category.length(); k++) {
@@ -177,27 +178,23 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
                     }
 
                 }
+                try {
+                    JSONObject geometry = contenedor.getJSONObject(GEOMETRY);
 
-                //  JSONObject geometry = contenedor.getJSONObject(GEOMETRY);
+                    JSONArray coord = geometry.getJSONArray(COORDINANTES);
+                    try {
+                        evento.setC0(coord.getString(0));
+                    } catch (JSONException v) {
+                        evento.setC0("");
+                    }
+                    try {
+                        evento.setC1(coord.getString(1));
+                    } catch (JSONException v) {
+                        evento.setC1("");
+                    }
+                } catch (JSONException e) {
 
-                //     JSONArray coord = geometry.getJSONArray(COORDINANTES);
-
-                //for (int m = 0; m < coord.length(); m++) {
-                //    try {
-                //         JSONObject c1 = coord.getJSONObject(m);
-                //        evento.setC1(c1.getString(COORD1).toString());
-
-                //  } catch (JSONException v) {
-                //   }
-                //    try {
-                //      JSONObject c0 = coord.getJSONObject(m);
-                //    evento.setC0(Double.parseDouble(c0.getString(String.valueOf(COORD0)).toString()));
-
-                //  } catch (JSONException v) {
-                //      v.printStackTrace();
-                //     v.getMessage();
-                //  }
-                // }
+                }
 
                 publishProgress(evento);
             }

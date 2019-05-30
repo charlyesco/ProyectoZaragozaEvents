@@ -15,7 +15,7 @@ public class Evento {
     //elevacion izquierda o no aparece
    // private float latitud;
    // private float longitud;
-    private double c0;
+    private String c0;
     private String c1;
     private String startDate;
     private String description;
@@ -163,11 +163,11 @@ public class Evento {
         this.horario = horario;
     }
 
-    public double getC0() {
+    public String getC0() {
         return c0;
     }
 
-    public void setC0(double c0) {
+    public void setC0(String c0) {
         this.c0 = c0;
     }
 
