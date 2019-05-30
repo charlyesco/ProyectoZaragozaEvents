@@ -19,7 +19,7 @@ public class Evento {
     private String c1;
     private String startDate;
     private String description;
-    private int image;
+    private String image;
     private String endDate;
     //horas
     private String startTime;
@@ -107,11 +107,11 @@ public class Evento {
         this.description = description;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

@@ -37,7 +37,7 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
     public static final String COORDINANTES = "coordinates";
     public static final String COORD0 = "0";
     public static final String COORD1 = "1";
-
+    public static final String IMAGE="image";
     public EventosAsyncTask(IEventos ievento) {
         eventoMain = ievento;
     }
@@ -79,6 +79,12 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
                 } catch (JSONException ex) {
 
                     evento.setDescription("Descripción no disponible");
+                }
+                try {
+                    evento.setImage(contenedor.getString(IMAGE));
+                } catch (JSONException ex) {
+
+                    evento.setImage("");
                 }
                 try {
                     evento.setStartDate(contenedor.getString(STARTDATE));
