@@ -46,7 +46,7 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
     protected Boolean doInBackground(Void... params) {
         String titulo = null, desc = null, start = null, end = null;
         Evento evento;
-        String url = "https://www.zaragoza.es/sede/servicio/cultura/evento/list.json";
+        String url = "https://www.zaragoza.es/sede/servicio/cultura/evento/list.json?srsname=wgs84";
         try {
             URL urlPeticion = new URL(url);
             HttpURLConnection httpConnection = (HttpURLConnection) urlPeticion.openConnection();
