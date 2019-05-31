@@ -13,6 +13,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -27,6 +28,7 @@ import java.util.Locale;
 public class DescriptionActivity extends AppCompatActivity {
     public static String title = "";
     public static String titlePlace="";
+    AdaptadorFiltro adaptadorFiltro;
 
     @TargetApi(Build.VERSION_CODES.N)
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -37,6 +39,7 @@ public class DescriptionActivity extends AppCompatActivity {
         int startYearName = 0, endYearName = 0, startFinalDay = 0, endFinalDay = 0, startMonth = 0, endMonth = 0, startWeekDay = 0, endWeekDay = 0, todayFinalDay = 0, todayMonth = 0, todayYear = 0;
         String mensaje = null, mensaje2 = null, mensaje3 = null,mensajeMañana=null,mensajeMismoDia;
         ImageButton b,buttoMaps;
+        ImageView iconoTema;
         Date date = null,date2=null;
 
 
@@ -53,6 +56,7 @@ public class DescriptionActivity extends AppCompatActivity {
         final String m= Html.fromHtml(extras.getString(EventosAsyncTask.DESCRIPTION), Html.FROM_HTML_MODE_LEGACY).toString();
 
         buttoMaps=findViewById(R.id.bt_maps);
+        iconoTema=findViewById(R.id.iv_tema);
         b=findViewById(R.id.bt_desc_anadir);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -119,6 +123,10 @@ public class DescriptionActivity extends AppCompatActivity {
         // tv_desc.setText(extras.getString(EventosAsyncTask.DESCRIPTION));
         tv_lugar.setText(extras.getString(EventosAsyncTask.PLACE_TITLE));
         tv_horario.setText(extras.getString(EventosAsyncTask.HORARIO));
+        iconoTema.setImageResource( AdaptadorFiltro.asignarImagen(extras.getString(EventosAsyncTask.TITLE_CATEGORY)));
+
+
+
         //LLegan las coordenadas
         String c0=extras.getString(EventosAsyncTask.COORD0);
         String c1=extras.getString(EventosAsyncTask.COORD1);

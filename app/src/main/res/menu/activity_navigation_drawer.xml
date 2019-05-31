@@ -28,15 +28,15 @@
             <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/contacto"
-                    android:icon="@drawable/ic_menu_manage"
+                    android:icon="@drawable/contact"
                     android:title="Contacto" />
                 <item
                     android:id="@+id/preguntas"
-                    android:icon="@drawable/ic_menu_manage"
+                    android:icon="@drawable/preguntas"
                     android:title="Preguntas Frecuentes" />
                 <item
                     android:id="@+id/info"
-                    android:icon="@drawable/ic_menu_manage"
+                    android:icon="@drawable/info"
                     android:title="Info App" />
 
             </group>
