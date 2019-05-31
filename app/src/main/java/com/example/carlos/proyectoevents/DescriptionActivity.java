@@ -192,6 +192,7 @@ public class DescriptionActivity extends AppCompatActivity {
                 Intent i =new Intent(DescriptionActivity.this,MapsActivity.class);
                 i.putExtra(EventosAsyncTask.COORD1,c1);
                 i.putExtra(EventosAsyncTask.COORD0,c0);
+                i.putExtra(EventosAsyncTask.TITLE,title);
                 startActivity(i);
             }
         });
