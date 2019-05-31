@@ -1,9 +1,6 @@
 package com.example.carlos.proyectoevents;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,40 +10,32 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.text.Normalizer;
 import java.util.ArrayList;
 
 
 public class AdaptadorFiltro extends BaseAdapter implements Filterable {
     Context context;
-    ArrayList<Evento> listaEventos;
-    ArrayList<Evento> origi;
+    private ArrayList<Evento> listaEventos;
+    private ArrayList<Evento> origi;
 
 
     public AdaptadorFiltro(Context c, ArrayList<Evento> listaEventos) {
         super();
         this.context = c;
-        this.listaEventos = listaEventos;
+        this.setListaEventos(listaEventos);
 
     }
 
 
     @Override
     public int getCount() {
-        return listaEventos.size();
+        return getListaEventos().size();
     }
 
     @Override
     public Object getItem(int position) {
-        return listaEventos.get(position);
+        return getListaEventos().get(position);
     }
 
     @Override
@@ -75,12 +64,12 @@ public class AdaptadorFiltro extends BaseAdapter implements Filterable {
 
 
 
-holder.cartel.setImageBitmap(listaEventos.get(position).getImageBmp());
+holder.cartel.setImageBitmap(getListaEventos().get(position).getImageBmp());
 
-        holder.i.setImageResource(asignarImagen(listaEventos.get(position).getTitleCategory()));
-        holder.titulo.setText(listaEventos.get(position).getTitleEvent());
-        holder.tema.setText(listaEventos.get(position).getTitleCategory());
-        holder.lugar.setText(listaEventos.get(position).getPlace());
+        holder.i.setImageResource(asignarImagen(getListaEventos().get(position).getTitleCategory()));
+        holder.titulo.setText(getListaEventos().get(position).getTitleEvent());
+        holder.tema.setText(getListaEventos().get(position).getTitleCategory());
+        holder.lugar.setText(getListaEventos().get(position).getPlace());
         return view;
 
 
@@ -98,11 +87,11 @@ holder.cartel.setImageBitmap(listaEventos.get(position).getImageBmp());
             protected FilterResults performFiltering(CharSequence constraint) {
                 final FilterResults oReturn = new FilterResults();
                 final ArrayList<Evento> results = new ArrayList<Evento>();
-                if (origi == null)
-                    origi = listaEventos;
+                if (getOrigi() == null)
+                    setOrigi(getListaEventos());
                 if (constraint != null) {
-                    if (origi != null && origi.size() > 0) {
-                        for (final Evento g : origi) {
+                    if (getOrigi() != null && getOrigi().size() > 0) {
+                        for (final Evento g : getOrigi()) {
                             if (NavigationActivity.control == 0) {
                                 String comparar = g.getTitleEvent().toLowerCase();
                                 String comparar2 = Normalizer.normalize(comparar, Normalizer.Form.NFD);
@@ -137,7 +126,7 @@ holder.cartel.setImageBitmap(listaEventos.get(position).getImageBmp());
             @Override
             protected void publishResults(CharSequence constraint,
                                           FilterResults results) {
-                listaEventos = (ArrayList<Evento>) results.values;
+                setListaEventos((ArrayList<Evento>) results.values);
                 notifyDataSetChanged();
             }
         };
@@ -203,6 +192,22 @@ holder.cartel.setImageBitmap(listaEventos.get(position).getImageBmp());
         return result;
     }
 
+    public ArrayList<Evento> getListaEventos() {
+        return listaEventos;
+    }
+
+    public void setListaEventos(ArrayList<Evento> listaEventos) {
+        this.listaEventos = listaEventos;
+    }
+
+    public ArrayList<Evento> getOrigi() {
+        return origi;
+    }
+
+    public void setOrigi(ArrayList<Evento> origi) {
+        this.origi = origi;
+    }
+
     public class ViewHolder {
         ImageView cartel;
         ImageView i;
@@ -218,5 +223,9 @@ holder.cartel.setImageBitmap(listaEventos.get(position).getImageBmp());
 
         }
 
+    }
+    @Override
+    public boolean hasStableIds() {
+        return false;
     }
 }

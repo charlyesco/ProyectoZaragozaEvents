@@ -240,7 +240,8 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
                         evento.setC1("");
                     }
                 } catch (JSONException e) {
-
+                    evento.setC0("");
+                    evento.setC1("");
                 }
 
                 publishProgress(evento);

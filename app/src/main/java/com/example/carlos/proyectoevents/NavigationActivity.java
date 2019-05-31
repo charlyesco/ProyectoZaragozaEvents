@@ -82,10 +82,11 @@ public class NavigationActivity extends AppCompatActivity
         listView.setAdapter(adaptadorFiltro);
         EventosAsyncTask eat = new EventosAsyncTask(contrato,(AdaptadorFiltro) listView.getAdapter());
         eat.execute();
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Evento e = datos.get(position);
+                Evento e= (Evento) adaptadorFiltro.getItem(position);
                 Intent intento = new Intent(NavigationActivity.this, DescriptionActivity.class);
                 intento.putExtra(EventosAsyncTask.COORD1,e.getC1());
                 intento.putExtra(EventosAsyncTask.COORD0,e.getC0().toString());
