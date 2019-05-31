@@ -45,15 +45,14 @@ public class AdaptadorFiltro extends BaseAdapter implements Filterable {
 
     @Override
     public View getView(final int position, View view, ViewGroup parent) {
-         final ViewHolder holder;
-
+        final ViewHolder holder;
 
 
         if (view == null) {
 
 
             view = LayoutInflater.from(context).inflate(R.layout.item, null);
-           holder = new ViewHolder(view);
+            holder = new ViewHolder(view);
 
             view.setTag(holder);
         } else {
@@ -61,10 +60,7 @@ public class AdaptadorFiltro extends BaseAdapter implements Filterable {
         }
 
 
-
-
-
-holder.cartel.setImageBitmap(getListaEventos().get(position).getImageBmp());
+        holder.cartel.setImageBitmap(getListaEventos().get(position).getImageBmp());
 
         holder.i.setImageResource(asignarImagen(getListaEventos().get(position).getTitleCategory()));
         holder.titulo.setText(getListaEventos().get(position).getTitleEvent());
@@ -164,27 +160,29 @@ holder.cartel.setImageBitmap(getListaEventos().get(position).getImageBmp());
             result = R.drawable.otros;
         } else if (b.equals("visitas turisticas")) {
             result = R.drawable.actividades_turisticas;
-        }
-        else if (b.equals("ciencia y tecnologia")) {
+        } else if (b.equals("ciencia y tecnologia")) {
             result = R.drawable.ciencia;
-        }
-        else if (b.equals("exposiciones")) {
+        } else if (b.equals("exposiciones")) {
             result = R.drawable.picture;
-        }
-        else if (b.equals("actividades vacacionales")) {
+        } else if (b.equals("actividades vacacionales")) {
             result = R.drawable.vacacionales;
-        }
-        else if (b.equals("teatro y artes escenicas")) {
+        } else if (b.equals("teatro y artes escenicas")) {
             result = R.drawable.teatro;
-        }else if (b.equals("turismo")) {
+        } else if (b.equals("turismo")) {
             result = R.drawable.turismo;
-        }else if (b.equals("formacion")) {
+        } else if (b.equals("formacion")) {
             result = R.drawable.formacion;
-        }else if (b.equals("ferias y fiestas")) {
+        } else if (b.equals("ferias y fiestas")) {
             result = R.drawable.fiestas;
-        }
-
-        else {
+        } else if (b.equals("medio ambiente y naturaleza")) {
+            result = R.drawable.medio_ambiente;
+        } else if (b.equals("idiomas")) {
+            result = R.drawable.idiomas;
+        } else if (b.equals("desarrollo personal")) {
+            result = R.drawable.personal;
+        } else if (b.equals("aire libre y excursiones")) {
+            result = R.drawable.aire_libre_excursiones;
+        } else {
             result = R.drawable.cine;
         }
 
@@ -214,16 +212,18 @@ holder.cartel.setImageBitmap(getListaEventos().get(position).getImageBmp());
         TextView titulo;
         TextView tema;
         TextView lugar;
-        public ViewHolder(View v){
+
+        public ViewHolder(View v) {
             titulo = v.findViewById(R.id.item_tv_title);
             tema = v.findViewById(R.id.item_tv_theme);
             lugar = v.findViewById(R.id.item_tv_lugar);
-             i = v.findViewById(R.id.image_theme);
-            cartel= v.findViewById(R.id.item_image);
+            i = v.findViewById(R.id.image_theme);
+            cartel = v.findViewById(R.id.item_image);
 
         }
 
     }
+
     @Override
     public boolean hasStableIds() {
         return false;

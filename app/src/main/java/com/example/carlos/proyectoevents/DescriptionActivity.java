@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -35,21 +36,23 @@ public class DescriptionActivity extends AppCompatActivity {
         String start = null, end = null, startDayName = null, endDayName = null, startMonthName = null, endMonthName = null;
         int startYearName = 0, endYearName = 0, startFinalDay = 0, endFinalDay = 0, startMonth = 0, endMonth = 0, startWeekDay = 0, endWeekDay = 0, todayFinalDay = 0, todayMonth = 0, todayYear = 0;
         String mensaje = null, mensaje2 = null, mensaje3 = null,mensajeMañana=null,mensajeMismoDia;
-        ImageButton b;
+        ImageButton b,buttoMaps;
         Date date = null,date2=null;
+
 
 
 
         int today = 0;
 
         super.onCreate(savedInstanceState);
-        Bundle extras = getIntent().getExtras();
+      final  Bundle extras = getIntent().getExtras();
         setContentView(R.layout.activity_description);
 
         title = extras.getString(EventosAsyncTask.TITLE);
         final String des=extras.getString(EventosAsyncTask.DESCRIPTION),cat=extras.getString(EventosAsyncTask.TITLE_CATEGORY),lugar=extras.getString(EventosAsyncTask.STREET);
         final String m= Html.fromHtml(extras.getString(EventosAsyncTask.DESCRIPTION), Html.FROM_HTML_MODE_LEGACY).toString();
 
+        buttoMaps=findViewById(R.id.bt_maps);
         b=findViewById(R.id.bt_desc_anadir);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -180,6 +183,18 @@ public class DescriptionActivity extends AppCompatActivity {
             }
         });
 
+        buttoMaps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String c1,c0;
+                c0=extras.getString(EventosAsyncTask.COORD0);
+                c1=extras.getString(EventosAsyncTask.COORD1);
+                Intent i =new Intent(DescriptionActivity.this,MapsActivity.class);
+                i.putExtra(EventosAsyncTask.COORD1,c1);
+                i.putExtra(EventosAsyncTask.COORD0,c0);
+                startActivity(i);
+            }
+        });
 
     }
 }

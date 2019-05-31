@@ -22,6 +22,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+//llegan las coordenadas
+        Bundle extras = getIntent().getExtras();
+        String c0=extras.getString(EventosAsyncTask.COORD0);
+        String c1=extras.getString(EventosAsyncTask.COORD1);
     }
 
 

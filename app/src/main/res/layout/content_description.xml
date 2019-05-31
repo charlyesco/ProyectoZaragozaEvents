@@ -115,8 +115,6 @@
             android:id="@+id/bt_desc_anadir"
             android:layout_width="52dp"
             android:layout_height="50dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="52dp"
             android:layout_marginRight="52dp"
@@ -124,8 +122,6 @@
             android:src="@drawable/calendario"
             android:text=""
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -141,6 +137,22 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_desc_fecha" />
+
+        <ImageButton
+            android:id="@+id/bt_maps"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:src="@android:drawable/ic_menu_mapmode"
+            android:text="Maps"
+            app:layout_constraintEnd_toStartOf="@+id/bt_desc_anadir"
+            app:layout_constraintHorizontal_bias="0.935"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </android.support.constraint.ConstraintLayout>
