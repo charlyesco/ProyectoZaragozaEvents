@@ -1,6 +1,8 @@
 package com.example.carlos.proyectoevents;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,14 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.Normalizer;
 import java.util.ArrayList;
 
@@ -45,30 +55,32 @@ public class AdaptadorFiltro extends BaseAdapter implements Filterable {
     }
 
     @Override
-    public View getView(int position, View view, ViewGroup parent) {
-        ViewHolder holder;
+    public View getView(final int position, View view, ViewGroup parent) {
+         final ViewHolder holder;
+
+
 
         if (view == null) {
 
 
             view = LayoutInflater.from(context).inflate(R.layout.item, null);
-            holder = new ViewHolder();
-            holder.titulo = view.findViewById(R.id.item_tv_title);
-            holder.tema = view.findViewById(R.id.item_tv_theme);
-            holder.lugar = view.findViewById(R.id.item_tv_lugar);
-            ImageView image = view.findViewById(R.id.image_theme);
-            holder.i = asignarImagen(image, listaEventos.get(position).getTitleCategory());
-
+           holder = new ViewHolder(view);
 
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
         }
+
+
+
+
+
+holder.cartel.setImageBitmap(listaEventos.get(position).getImageBmp());
+
+        holder.i.setImageResource(asignarImagen(listaEventos.get(position).getTitleCategory()));
         holder.titulo.setText(listaEventos.get(position).getTitleEvent());
         holder.tema.setText(listaEventos.get(position).getTitleCategory());
         holder.lugar.setText(listaEventos.get(position).getPlace());
-        ImageView image = view.findViewById(R.id.image_theme);
-        holder.i = asignarImagen(image, listaEventos.get(position).getTitleCategory());
         return view;
 
 
@@ -131,70 +143,80 @@ public class AdaptadorFiltro extends BaseAdapter implements Filterable {
         };
     }
 
-    public static ImageView asignarImagen(ImageView i, String tema) {
+    public static int asignarImagen(String tema) {
 
         String b = Normalizer.normalize(tema, Normalizer.Form.NFD).toLowerCase();
         b = b.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
-
+        int result = R.drawable.cine;
         if (b.equals("conferencias y congresos")) {
-            i.setImageResource(R.drawable.conferencias);
+            result = R.drawable.conferencias;
 
         } else if (b.equals("artes plasticas")) {
-            i.setImageResource(R.drawable.artes_plasticas);
+            result = R.drawable.artes_plasticas;
         } else if (b.equals("musica")) {
-            i.setImageResource(R.drawable.musica);
+            result = R.drawable.musica;
         } else if (b.equals("deporte")) {
-            i.setImageResource(R.drawable.deporte);
+            result = R.drawable.deporte;
         } else if (b.equals("ocio y juegos")) {
-            i.setImageResource(R.drawable.ocio);
+            result = R.drawable.ocio;
         } else if (b.equals("cine")) {
-            i.setImageResource(R.drawable.cine);
+            result = R.drawable.cine;
         } else if (b.equals("otros")) {
-            i.setImageResource(R.drawable.otros);
+            result = R.drawable.otros;
         } else if (b.equals("gastronomia")) {
-            i.setImageResource(R.drawable.gastronomia);
+            result = R.drawable.gastronomia;
         } else if (b.equals("cursos y talleres")) {
-            i.setImageResource(R.drawable.cursos_talleres);
+            result = R.drawable.cursos_talleres;
         } else if (b.equals("imagen y sonido")) {
-            i.setImageResource(R.drawable.imagen_sonido);
+            result = R.drawable.imagen_sonido;
         } else if (b.equals("cine")) {
-            i.setImageResource(R.drawable.cine);
+            result = R.drawable.cine;
         } else if (b.equals("otros")) {
-            i.setImageResource(R.drawable.otros);
+            result = R.drawable.otros;
         } else if (b.equals("visitas turisticas")) {
-            i.setImageResource(R.drawable.actividades_turisticas);
+            result = R.drawable.actividades_turisticas;
         }
         else if (b.equals("ciencia y tecnologia")) {
-            i.setImageResource(R.drawable.ciencia);
+            result = R.drawable.ciencia;
         }
         else if (b.equals("exposiciones")) {
-            i.setImageResource(R.drawable.picture);
+            result = R.drawable.picture;
         }
         else if (b.equals("actividades vacacionales")) {
-            i.setImageResource(R.drawable.vacacionales);
+            result = R.drawable.vacacionales;
         }
         else if (b.equals("teatro y artes escenicas")) {
-            i.setImageResource(R.drawable.teatro);
+            result = R.drawable.teatro;
         }else if (b.equals("turismo")) {
-            i.setImageResource(R.drawable.turismo);
+            result = R.drawable.turismo;
         }else if (b.equals("formacion")) {
-            i.setImageResource(R.drawable.formacion);
+            result = R.drawable.formacion;
         }else if (b.equals("ferias y fiestas")) {
-            i.setImageResource(R.drawable.fiestas);
+            result = R.drawable.fiestas;
         }
 
         else {
-            i.setImageResource(R.drawable.cine);
+            result = R.drawable.cine;
         }
 
 
-        return i;
+        return result;
     }
 
     public class ViewHolder {
+        ImageView cartel;
         ImageView i;
         TextView titulo;
         TextView tema;
         TextView lugar;
+        public ViewHolder(View v){
+            titulo = v.findViewById(R.id.item_tv_title);
+            tema = v.findViewById(R.id.item_tv_theme);
+            lugar = v.findViewById(R.id.item_tv_lugar);
+             i = v.findViewById(R.id.image_theme);
+            cartel= v.findViewById(R.id.item_image);
+
+        }
+
     }
 }

@@ -61,8 +61,7 @@ public class NavigationActivity extends AppCompatActivity
         pb.setProgress(0);
 
 
-        EventosAsyncTask eat = new EventosAsyncTask(contrato);
-        eat.execute();
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -81,7 +80,8 @@ public class NavigationActivity extends AppCompatActivity
         adaptadorFiltro = new AdaptadorFiltro(NavigationActivity.this, datos);
 
         listView.setAdapter(adaptadorFiltro);
-
+        EventosAsyncTask eat = new EventosAsyncTask(contrato,(AdaptadorFiltro) listView.getAdapter());
+        eat.execute();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -240,14 +240,19 @@ public class NavigationActivity extends AppCompatActivity
 
     @Override
     public boolean onQueryTextChange(String newText) {
+        AdaptadorFiltro customAdapter = (AdaptadorFiltro) listView.getAdapter();
+        Filter filter = customAdapter.getFilter();
+
 
         if (TextUtils.isEmpty(newText)) {
+            filter.filter("");
             listView.clearTextFilter();
             control = 0;
             searchView.setQueryHint("Escribir evento...");
         } else {
 
-            listView.setFilterText(newText);
+           // listView.setFilterText(newText);
+            filter.filter(newText);
         }
         return true;
     }

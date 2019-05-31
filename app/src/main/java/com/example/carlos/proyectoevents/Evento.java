@@ -1,6 +1,8 @@
 package com.example.carlos.proyectoevents;
 
 
+import android.graphics.Bitmap;
+
 public class Evento {
     private String id;
     private String titleEvent;
@@ -21,6 +23,7 @@ public class Evento {
     private String description;
     private String image;
     private String endDate;
+    private Bitmap ImageBmp;
     //horas
     private String startTime;
     private String endTime;
@@ -177,6 +180,14 @@ public class Evento {
 
     public void setC1(String c1) {
         this.c1 = c1;
+    }
+
+    public Bitmap getImageBmp() {
+        return ImageBmp;
+    }
+
+    public void setImageBmp(Bitmap imageBmp) {
+        ImageBmp = imageBmp;
     }
 }
 

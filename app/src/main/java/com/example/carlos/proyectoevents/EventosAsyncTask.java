@@ -1,16 +1,24 @@
 package com.example.carlos.proyectoevents;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 
 public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
 
@@ -37,9 +45,11 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
     public static final String COORDINANTES = "coordinates";
     public static final String COORD0 = "0";
     public static final String COORD1 = "1";
-    public static final String IMAGE="image";
-    public EventosAsyncTask(IEventos ievento) {
+    public  final String IMAGE="image";
+    final AdaptadorFiltro a=null;
+    public EventosAsyncTask(IEventos ievento,AdaptadorFiltro a) {
         eventoMain = ievento;
+        a=a;
     }
 
     @Override
@@ -80,12 +90,43 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
 
                     evento.setDescription("Descripción no disponible");
                 }
+
+                final Evento finalEvento = evento;
+                new Thread(new Runnable() {
+                    public void run() {
+                        URL urlImage = null;
+                        try {
+                            urlImage = new URL("http:"+ finalEvento.getImage());
+                            final Bitmap bmp= BitmapFactory.decodeStream(urlImage.openConnection().getInputStream());
+                            Log.d("Bytes", String.valueOf(bmp.getByteCount()));
+                            finalEvento.setImageBmp(bmp);
+                        } catch (MalformedURLException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }).start();
+
+
+
+
+
+
+
+
+
+
                 try {
                     evento.setImage(contenedor.getString(IMAGE));
                 } catch (JSONException ex) {
 
                     evento.setImage("");
                 }
+
+
+
                 try {
                     evento.setStartDate(contenedor.getString(STARTDATE));
                 } catch (JSONException ex) {
