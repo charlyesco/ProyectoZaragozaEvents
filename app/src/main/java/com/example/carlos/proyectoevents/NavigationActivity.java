@@ -3,10 +3,8 @@ package com.example.carlos.proyectoevents;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
+import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.View;
@@ -20,12 +18,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.Filter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 public class NavigationActivity extends AppCompatActivity
@@ -44,6 +43,7 @@ public class NavigationActivity extends AppCompatActivity
     ArrayList<Evento> datos = new ArrayList<Evento>();
     SearchView searchView;
     MenuItem sesion;
+    public static String IMAGE_RES_ID_KEY="hola";
 
 
     @Override
@@ -97,7 +97,8 @@ public class NavigationActivity extends AppCompatActivity
                 intento.putExtra(EventosAsyncTask.STARTDATE, e.getStartDate().toString());
                 intento.putExtra(EventosAsyncTask.ENDDATE, e.getEndDate());
                 intento.putExtra(EventosAsyncTask.TITLE, e.getTitleEvent().toString());
-                intento.putExtra(EventosAsyncTask.HORARIO, e.getHorario().toString());
+                intento.putExtra(EventosAsyncTask.HORARIO, e.getHorario().toString());//  intento.putExtra(IMAGE_RES_ID_KEY,e.getImageBmp());
+                intento.putExtra(IMAGE_RES_ID_KEY, createImageFromBitmap(e.getImageBmp()));
                 startActivity(intento);
             }
         });
@@ -263,5 +264,19 @@ public class NavigationActivity extends AppCompatActivity
         return false;
     }
 
-
+    public String createImageFromBitmap(Bitmap bitmap) {
+        String fileName = "myImage";//no .png or .jpg needed
+        try {
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+            FileOutputStream fo = openFileOutput(fileName, Context.MODE_PRIVATE);
+            fo.write(bytes.toByteArray());
+            // remember close file output
+            fo.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            fileName = null;
+        }
+        return fileName;
+    }
 }
