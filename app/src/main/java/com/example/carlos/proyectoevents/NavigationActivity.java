@@ -133,9 +133,9 @@ public class NavigationActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.navigation, menu);
         sesion=menu.findItem(R.id.icono);
         if(login==0){
-            sesion.setIcon(ContextCompat.getDrawable(this, R.drawable.otros));
+            sesion.setIcon(ContextCompat.getDrawable(this, R.drawable.close));
         }else{
-            sesion.setIcon(ContextCompat.getDrawable(this, R.drawable.imagen_sonido));
+            sesion.setIcon(ContextCompat.getDrawable(this, R.drawable.open));
         }
         sesion.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override

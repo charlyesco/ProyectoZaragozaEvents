@@ -1,6 +1,7 @@
 package com.example.carlos.proyectoevents;
 
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -43,6 +44,7 @@ public class DescriptionActivity extends AppCompatActivity {
         ImageView iconoTema, cartel;
         Date date = null, date2 = null;
         Bitmap bimage = null;
+
 
 
         int today = 0;
@@ -135,8 +137,8 @@ public class DescriptionActivity extends AppCompatActivity {
         cartel.setImageBitmap(bimage);
 
         //LLegan las coordenadas
-        String c0 = extras.getString(EventosAsyncTask.COORD0);
-        String c1 = extras.getString(EventosAsyncTask.COORD1);
+        final String coordenadaLlegan0 = extras.getString(EventosAsyncTask.COORD0);
+        final String coordenadaLlegan1 = extras.getString(EventosAsyncTask.COORD1);
 
         tv_desc.setText(Html.fromHtml(Html.fromHtml(extras.getString(EventosAsyncTask.DESCRIPTION)).toString()));
         tv_desc.setMovementMethod(new ScrollingMovementMethod());
@@ -197,19 +199,29 @@ public class DescriptionActivity extends AppCompatActivity {
             }
         });
 
-        buttoMaps.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String c1, c0;
-                c0 = extras.getString(EventosAsyncTask.COORD0);
-                c1 = extras.getString(EventosAsyncTask.COORD1);
+    buttoMaps.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            String c1, c0;
+            c0 = extras.getString(EventosAsyncTask.COORD0);
+            c1 = extras.getString(EventosAsyncTask.COORD1);
+            if (!coordenadaLlegan0.equals("") || !coordenadaLlegan1.equals("")) {
                 Intent i = new Intent(DescriptionActivity.this, MapsActivity.class);
                 i.putExtra(EventosAsyncTask.COORD1, c1);
                 i.putExtra(EventosAsyncTask.COORD0, c0);
                 i.putExtra(EventosAsyncTask.TITLE, title);
                 startActivity(i);
             }
-        });
+            else{
+                AlertDialog.Builder ventana;
+                ventana = new AlertDialog.Builder(DescriptionActivity.this);
+                ventana.setTitle("Advertencia");
+                ventana.setMessage("Este evento no dispone de ubicación.");
+                ventana.setIcon(R.drawable.info);
+                ventana.show();
+            }
+        }
+    });
 
     }
 }
