@@ -2,6 +2,7 @@ package com.example.carlos.proyectoevents;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
@@ -17,6 +19,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import java.io.FileNotFoundException;
@@ -27,7 +30,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
-public class DescriptionActivity extends AppCompatActivity {
+public class DescriptionActivity extends AppCompatActivity implements FragmentoSeleccion.Idioma{
     public static String title = "";
     public static String titlePlace = "";
     AdaptadorFiltro adaptadorFiltro;
@@ -40,10 +43,11 @@ public class DescriptionActivity extends AppCompatActivity {
         String start = null, end = null, startDayName = null, endDayName = null, startMonthName = null, endMonthName = null;
         int startYearName = 0, endYearName = 0, startFinalDay = 0, endFinalDay = 0, startMonth = 0, endMonth = 0, startWeekDay = 0, endWeekDay = 0, todayFinalDay = 0, todayMonth = 0, todayYear = 0;
         String mensaje = null, mensaje2 = null, mensaje3 = null, mensajeMañana = null, mensajeMismoDia;
-        ImageButton b, buttoMaps;
+        ImageButton b, buttoMaps,bt_redsocial;
         ImageView iconoTema, cartel;
         Date date = null, date2 = null;
         Bitmap bimage = null;
+
 
 
 
@@ -58,6 +62,7 @@ public class DescriptionActivity extends AppCompatActivity {
         final String m = Html.fromHtml(extras.getString(EventosAsyncTask.DESCRIPTION), Html.FROM_HTML_MODE_LEGACY).toString();
 
         buttoMaps = findViewById(R.id.bt_maps);
+        bt_redsocial=findViewById(R.id.bt_redsocial);
         iconoTema = findViewById(R.id.iv_tema);
         cartel = findViewById(R.id.iv_cartel);
         b = findViewById(R.id.bt_desc_anadir);
@@ -222,6 +227,47 @@ public class DescriptionActivity extends AppCompatActivity {
             }
         }
     });
+
+    bt_redsocial.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if(NavigationActivity.login==1){
+                FragmentManager fm=getSupportFragmentManager();
+                FragmentoSeleccion fs= new FragmentoSeleccion();
+                fs.show(fm,"Alerta TAG");
+            }else{
+                AlertDialog.Builder ventana;
+                ventana = new AlertDialog.Builder(DescriptionActivity.this);
+                ventana.setTitle("Advertencia");
+                ventana.setMessage("Necesita registrarse para esta función");
+                ventana.setIcon(R.drawable.info);
+                ventana.show();
+            }
+        }
+    });
+
+    }
+
+    @Override
+    public void idiomaSeleccionado(String idioma) {
+        Toast.makeText(getApplicationContext(), "Has elegido: " + idioma, Toast.LENGTH_LONG).show();
+       switch (idioma){
+           case "Whatsapp":
+               Intent i =new Intent(Intent.ACTION_SEND);
+               i.setType("text/plain");
+               i.putExtra(Intent.EXTRA_TEXT,"Gracias a la apicación ZaragozaEvents acudiré al evento: \n"+title);
+               i.setPackage("com.whatsapp");
+               startActivity(i);
+               break;
+           case "Facebook":
+               Intent i2 =new Intent(Intent.ACTION_SEND);
+               i2.setType("text/plain");
+               i2.putExtra(Intent.EXTRA_TEXT,"Gracias a la apicación ZaragozaEvents acudiré al evento: \n");
+               i2.setPackage("com.facebook.katana");
+               startActivity(i2);
+               break;
+
+       }
 
     }
 }

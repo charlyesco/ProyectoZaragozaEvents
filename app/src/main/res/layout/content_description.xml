@@ -144,6 +144,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
             android:src="@drawable/maps"
+            android:background="@color/common_google_signin_btn_text_dark_default"
             android:text="Maps"
             app:layout_constraintBottom_toTopOf="@+id/tv_desc_lugar"
             app:layout_constraintStart_toStartOf="parent"
@@ -165,7 +166,7 @@
             app:srcCompat="@mipmap/android" />
 
         <ImageButton
-            android:id="@+id/button2"
+            android:id="@+id/bt_redsocial"
             android:layout_width="49dp"
             android:layout_height="42dp"
             android:layout_marginStart="20dp"
@@ -174,7 +175,8 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="12dp"
             android:layout_marginBottom="8dp"
-            android:src="@drawable/compartir"
+            android:src="@drawable/compartir2"
+            android:background="@color/common_google_signin_btn_text_dark_default"
             android:text="Button"
             app:layout_constraintBottom_toTopOf="@+id/tv_desc_lugar"
             app:layout_constraintEnd_toEndOf="parent"
