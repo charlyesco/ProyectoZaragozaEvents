@@ -82,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        pd.setMessage("Realiando registro en linea...");
+        pd.setMessage("Realizando registro en linea...");
         pd.show();
 
 
