@@ -11,17 +11,16 @@ import android.support.v4.app.DialogFragment;
 public class FragmentoSeleccion extends DialogFragment {
     Idioma idioma;
 
-    //Sobreescribimos este metodo(Despues de crear la clase interface-->aqui se llama Idioma!!)
+    //Sobreescribimos este metodo(Despues de crear la clase interface)
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        //idioma sera la actividad prinipal
         idioma = (Idioma) getActivity();
     }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        final String[] idiomas = {"Whatsapp","Facebook"};
+        final String[] idiomas = {"Whatsapp", "Facebook"};
 
         AlertDialog.Builder ventana = new AlertDialog.Builder(getActivity());
 

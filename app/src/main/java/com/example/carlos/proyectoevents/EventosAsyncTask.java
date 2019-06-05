@@ -9,16 +9,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 
 public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
 
@@ -32,10 +28,8 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
     public static final String CATEGORY = "category";
     public static final String TITLE_CATEGORY = "titleCategory";
     public static final String PLACE_TITLE = "place_title";
-    //FECHAS
     public static final String STARTDATE = "startDate";
     public static final String ENDDATE = "endDate";
-    //HORAS
     public static final String STARTHOUR = "startTime";
     public static final String ENDHOUR = "endtTime";
     public static final String OPENHOUR = "openingHours";
@@ -45,11 +39,12 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
     public static final String COORDINANTES = "coordinates";
     public static final String COORD0 = "0";
     public static final String COORD1 = "1";
-    public  final String IMAGE="image";
-    final AdaptadorFiltro a=null;
-    public EventosAsyncTask(IEventos ievento,AdaptadorFiltro a) {
+    public final String IMAGE = "image";
+    final AdaptadorFiltro a = null;
+
+    public EventosAsyncTask(IEventos ievento, AdaptadorFiltro a) {
         eventoMain = ievento;
-        a=a;
+        a = a;
     }
 
     @Override
@@ -96,8 +91,8 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
                     public void run() {
                         URL urlImage = null;
                         try {
-                            urlImage = new URL("http:"+ finalEvento.getImage());
-                            final Bitmap bmp= BitmapFactory.decodeStream(urlImage.openConnection().getInputStream());
+                            urlImage = new URL("http:" + finalEvento.getImage());
+                            final Bitmap bmp = BitmapFactory.decodeStream(urlImage.openConnection().getInputStream());
                             Log.d("Bytes", String.valueOf(bmp.getByteCount()));
                             finalEvento.setImageBmp(bmp);
                         } catch (MalformedURLException e) {
@@ -109,23 +104,12 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
                     }
                 }).start();
 
-
-
-
-
-
-
-
-
-
                 try {
                     evento.setImage(contenedor.getString(IMAGE));
                 } catch (JSONException ex) {
 
                     evento.setImage("");
                 }
-
-
 
                 try {
                     evento.setStartDate(contenedor.getString(STARTDATE));
@@ -142,8 +126,6 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
 
 
                 //EL TITULO
-                // JSONArray arrayeventos = coleccion.getJSONArray(RESULT);
-                //contenedor = arrayeventos.getJSONObject(i);
                 JSONArray subEvent = contenedor.getJSONArray(SUBEVENTOS);
                 JSONObject l = null;
                 JSONObject loca = null;
@@ -177,7 +159,6 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
 
                         JSONObject horas = null;
 //recoge las horas y los dias pero y si hay mas dias o diferentes horarios
-                        //solucion concatenarlostodo
                         String horario = "", empieza, termina, dia, horarios = "";
                         for (int k = 0; k < contHours.length(); k++) {
                             horas = contHours.getJSONObject(k);
@@ -211,23 +192,18 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
                         evento.setEndTime("");
                     }
                 }
-
                 //RECOGEMOS EL TEMA DEL EVENTO
                 JSONArray category = contenedor.getJSONArray(CATEGORY);
                 for (int k = 0; k < category.length(); k++) {
                     try {
                         JSONObject categ = category.getJSONObject(k);
                         evento.setTitleCategory(categ.getString(TITLE));
-                        // evento.setTitleCategory(category.getJSONObject(k).getJSONObject(CATEGORY).getString(TITLE_CATEGORY));
                     } catch (JSONException ex) {
-                        //  evento.setTitleCategory("No Disponible");
-                        ex.printStackTrace();
+                        evento.setTitleCategory("No Disponible");
                     }
-
                 }
                 try {
                     JSONObject geometry = contenedor.getJSONObject(GEOMETRY);
-
                     JSONArray coord = geometry.getJSONArray(COORDINANTES);
                     try {
                         evento.setC0(coord.getString(0));
@@ -243,7 +219,6 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
                     evento.setC0("");
                     evento.setC1("");
                 }
-
                 publishProgress(evento);
             }
         } catch (IOException ex) {
@@ -251,7 +226,6 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         return true;
     }
 
@@ -263,32 +237,13 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
 
     @Override
     protected void onPreExecute() {
-        // pb.setMax(100);
-        //  pb.setProgress(0);
     }
 
     @Override
     protected void onPostExecute(Boolean result) {
-        //  if(result)
-        // Toast.makeText(MainActivity.this, "Tarea finalizada!",
-        //     Toast.LENGTH_SHORT).show();
     }
 
     @Override
     protected void onCancelled() {
-        // Toast.makeText(MainActivity.this, "Tarea cancelada!",
-        //      Toast.LENGTH_SHORT).show();
     }
 }
-
-//try{
-//   evento.setEndTime(hours.getString(ENDHOUR));
-
-// }catch (JSONException ex){
-//    evento.setEndTime("");
-// }
-//   try{
-//    evento.setDayOfWeek(hours.getString(DAYWEEK));
-// }catch (JSONException ex){
-//    evento.setDayOfWeek("");
-// }

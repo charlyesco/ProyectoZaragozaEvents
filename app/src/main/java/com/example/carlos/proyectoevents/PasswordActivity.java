@@ -29,7 +29,7 @@ public class PasswordActivity extends AppCompatActivity {
         b = findViewById(R.id.bt_enviar_pass);
         correo = findViewById(R.id.et_email_pass);
         mAuth = FirebaseAuth.getInstance();
-        mDialog=new ProgressDialog(this);
+        mDialog = new ProgressDialog(this);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,12 +52,12 @@ public class PasswordActivity extends AppCompatActivity {
         mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(PasswordActivity.this,"Se ha enviado un correo para restablecer tu contraseña.",Toast.LENGTH_SHORT).show();
-                    Intent i=new Intent(PasswordActivity.this,InicioActivity.class);
+                if (task.isSuccessful()) {
+                    Toast.makeText(PasswordActivity.this, "Se ha enviado un correo para restablecer tu contraseña.", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(PasswordActivity.this, InicioActivity.class);
                     startActivity(i);
-                }else{
-                    Toast.makeText(PasswordActivity.this,"Error al enviar el correo.",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(PasswordActivity.this, "Error al enviar el correo.", Toast.LENGTH_SHORT).show();
                 }
                 mDialog.dismiss();
             }

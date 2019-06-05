@@ -9,14 +9,7 @@ public class Evento {
     private String place_title;
     private String addres;
     private String region;
-    private String telefono;
-    //tema del evento
     private String titleCategory;
-    //longitud izquierda
-    //latitud centro o izq
-    //elevacion izquierda o no aparece
-   // private float latitud;
-   // private float longitud;
     private String c0;
     private String c1;
     private String startDate;
@@ -24,24 +17,23 @@ public class Evento {
     private String image;
     private String endDate;
     private Bitmap ImageBmp;
-    //horas
     private String startTime;
     private String endTime;
     private String dayOfWeek;
     private String horario;
 
 
-    public Evento(String titleEvent,String description,String lugar,String starDate,String titleCategory){
-        this.description=description;
-        this.titleEvent=titleEvent;
-        this.addres=lugar;
-        this.image=image;
-        this.titleCategory=titleCategory;
-        this.startDate=starDate;
+    public Evento(String titleEvent, String description, String lugar, String starDate, String titleCategory) {
+        this.description = description;
+        this.titleEvent = titleEvent;
+        this.addres = lugar;
+        this.image = image;
+        this.titleCategory = titleCategory;
+        this.startDate = starDate;
     }
 
 
-    public Evento(){
+    public Evento() {
 
     }
 
@@ -61,6 +53,7 @@ public class Evento {
     public void setTitleEvent(String titleEvent) {
         this.titleEvent = titleEvent;
     }
+
     public String getRegion() {
         return region;
     }
@@ -68,6 +61,7 @@ public class Evento {
     public void setRegion(String region) {
         this.region = region;
     }
+
     public String getPlace() {
         return place_title;
     }
@@ -82,15 +76,6 @@ public class Evento {
 
     public void setAddres(String addres) {
         this.addres = addres;
-    }
-
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
     }
 
     public String getStartDate() {

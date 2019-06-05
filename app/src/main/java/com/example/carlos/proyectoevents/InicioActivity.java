@@ -1,6 +1,6 @@
 package com.example.carlos.proyectoevents;
 
-import android.app.ActionBar;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -8,31 +8,27 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class InicioActivity extends AppCompatActivity {
     Button b;
     TextView sinLogin;
     AlertDialog.Builder ventana;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
 
 
-        sinLogin=findViewById(R.id.tv_sin_login);
-        b=findViewById(R.id.button_inicio);
+        sinLogin = findViewById(R.id.tv_sin_login);
+        b = findViewById(R.id.button_inicio);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intento=new Intent(InicioActivity.this,LoginActivity.class);
+                Intent intento = new Intent(InicioActivity.this, LoginActivity.class);
                 startActivity(intento);
             }
         });
@@ -40,7 +36,7 @@ public class InicioActivity extends AppCompatActivity {
         sinLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i =new Intent(InicioActivity.this,NavigationActivity.class);
+                Intent i = new Intent(InicioActivity.this, NavigationActivity.class);
                 startActivity(i);
             }
         });
@@ -67,7 +63,7 @@ public class InicioActivity extends AppCompatActivity {
                 ventana.setPositiveButton("SI", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                       finish();
+                        finish();
                     }
                 });
                 ventana.setNegativeButton("NO", new DialogInterface.OnClickListener() {

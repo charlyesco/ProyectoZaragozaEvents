@@ -23,7 +23,7 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 public class LoginActivity extends AppCompatActivity {
     private EditText et_email;
     private EditText et_password;
-    private Button b,b_inicio;
+    private Button b, b_inicio;
     private ProgressDialog pd;
     private TextView olvido;
 
@@ -42,9 +42,9 @@ public class LoginActivity extends AppCompatActivity {
         et_email = findViewById(R.id.et_correo);
         et_password = findViewById(R.id.password);
         b = findViewById(R.id.bt_registrarse);
-        b_inicio=findViewById(R.id.bt_iniciar2);
+        b_inicio = findViewById(R.id.bt_iniciar2);
         pd = new ProgressDialog(this);
-        olvido=findViewById(R.id.tv_olvido);
+        olvido = findViewById(R.id.tv_olvido);
 
         b.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
         olvido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(LoginActivity.this,PasswordActivity.class);
+                Intent i = new Intent(LoginActivity.this, PasswordActivity.class);
                 startActivity(i);
             }
         });
@@ -91,16 +91,16 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(LoginActivity.this, "Se ha registrado con el email: " + email, Toast.LENGTH_LONG).show();
-                    Intent i =new Intent(LoginActivity.this,InicioActivity.class);
+                    Intent i = new Intent(LoginActivity.this, InicioActivity.class);
                     startActivity(i);
                 } else {
                     if (task.getException() instanceof FirebaseAuthUserCollisionException) {
                         Toast.makeText(LoginActivity.this, "Ese usuario ya existe", Toast.LENGTH_LONG).show();
                     } else {
-                        if(pas.length()<6){
+                        if (pas.length() < 6) {
                             Toast.makeText(LoginActivity.this, "La contraseña debe contener más de 6 caracteres.", Toast.LENGTH_LONG).show();
 
-                        }else {
+                        } else {
                             Toast.makeText(LoginActivity.this, "Error en el registro.", Toast.LENGTH_LONG).show();
                         }
                     }
@@ -132,9 +132,9 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     //asignamos 1 porque hemos iniciado sesion
-                    NavigationActivity.login=1;
-                  Intent i=new Intent(LoginActivity.this,NavigationActivity.class);
-                  startActivity(i);
+                    NavigationActivity.login = 1;
+                    Intent i = new Intent(LoginActivity.this, NavigationActivity.class);
+                    startActivity(i);
                 } else {
                     if (task.getException() instanceof FirebaseAuthUserCollisionException) {
                         Toast.makeText(LoginActivity.this, "Ese usuario ya existe", Toast.LENGTH_LONG).show();

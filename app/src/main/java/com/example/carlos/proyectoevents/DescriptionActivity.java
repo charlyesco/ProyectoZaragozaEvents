@@ -30,10 +30,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
-public class DescriptionActivity extends AppCompatActivity implements FragmentoSeleccion.Idioma{
+public class DescriptionActivity extends AppCompatActivity implements FragmentoSeleccion.Idioma {
     public static String title = "";
-    public static String titlePlace = "";
-    AdaptadorFiltro adaptadorFiltro;
 
     @TargetApi(Build.VERSION_CODES.N)
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -43,12 +41,10 @@ public class DescriptionActivity extends AppCompatActivity implements FragmentoS
         String start = null, end = null, startDayName = null, endDayName = null, startMonthName = null, endMonthName = null;
         int startYearName = 0, endYearName = 0, startFinalDay = 0, endFinalDay = 0, startMonth = 0, endMonth = 0, startWeekDay = 0, endWeekDay = 0, todayFinalDay = 0, todayMonth = 0, todayYear = 0;
         String mensaje = null, mensaje2 = null, mensaje3 = null, mensajeMañana = null, mensajeMismoDia;
-        ImageButton b, buttoMaps,bt_redsocial;
+        ImageButton b, buttoMaps, bt_redsocial;
         ImageView iconoTema, cartel;
         Date date = null, date2 = null;
         Bitmap bimage = null;
-
-
 
 
         int today = 0;
@@ -62,7 +58,7 @@ public class DescriptionActivity extends AppCompatActivity implements FragmentoS
         final String m = Html.fromHtml(extras.getString(EventosAsyncTask.DESCRIPTION), Html.FROM_HTML_MODE_LEGACY).toString();
 
         buttoMaps = findViewById(R.id.bt_maps);
-        bt_redsocial=findViewById(R.id.bt_redsocial);
+        bt_redsocial = findViewById(R.id.bt_redsocial);
         iconoTema = findViewById(R.id.iv_tema);
         cartel = findViewById(R.id.iv_cartel);
         b = findViewById(R.id.bt_desc_anadir);
@@ -128,7 +124,6 @@ public class DescriptionActivity extends AppCompatActivity implements FragmentoS
 
         tv_category.setText(extras.getString(EventosAsyncTask.TITLE_CATEGORY));
         tv_street.setText(extras.getString(EventosAsyncTask.STREET));
-        // tv_desc.setText(extras.getString(EventosAsyncTask.DESCRIPTION));
         tv_lugar.setText(extras.getString(EventosAsyncTask.PLACE_TITLE));
         tv_horario.setText(extras.getString(EventosAsyncTask.HORARIO));
         iconoTema.setImageResource(AdaptadorFiltro.asignarImagen(extras.getString(EventosAsyncTask.TITLE_CATEGORY)));
@@ -138,7 +133,6 @@ public class DescriptionActivity extends AppCompatActivity implements FragmentoS
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        //   Bitmap bimage=getIntent().getParcelableExtra(NavigationActivity.IMAGE_RES_ID_KEY);
         cartel.setImageBitmap(bimage);
 
         //LLegan las coordenadas
@@ -171,14 +165,6 @@ public class DescriptionActivity extends AppCompatActivity implements FragmentoS
 
         }
 
-        final int finalStartYearName = startYearName;
-        final int finalStartFinalDay = startFinalDay + 1;
-        final int finalEndFinalDay = endFinalDay + 4;
-
-
-        final Date finalDate = date;
-        final Date finalDate1 = date2;
-        final GregorianCalendar finalC = c;
         final GregorianCalendar finalC1 = c;
         b.setOnClickListener(new View.OnClickListener() {
 
@@ -196,78 +182,73 @@ public class DescriptionActivity extends AppCompatActivity implements FragmentoS
                 i.putExtra(CalendarContract.Events.TITLE, title);
                 i.putExtra(CalendarContract.Events.DESCRIPTION, m);
                 i.putExtra(CalendarContract.Events.EVENT_LOCATION, lugar);
-                // i.putExtra(CalendarContract.Events.DTSTART, 5);
-                // i.putExtra(CalendarContract.Events.DTEND, 17);
-
-                // i.putExtra(CalendarContract.Events.DTSTART,)
                 startActivity(i);
             }
         });
 
-    buttoMaps.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            String c1, c0;
-            c0 = extras.getString(EventosAsyncTask.COORD0);
-            c1 = extras.getString(EventosAsyncTask.COORD1);
-            if (!coordenadaLlegan0.equals("") || !coordenadaLlegan1.equals("")) {
-                Intent i = new Intent(DescriptionActivity.this, MapsActivity.class);
-                i.putExtra(EventosAsyncTask.COORD1, c1);
-                i.putExtra(EventosAsyncTask.COORD0, c0);
-                i.putExtra(EventosAsyncTask.TITLE, title);
-                startActivity(i);
+        buttoMaps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String c1, c0;
+                c0 = extras.getString(EventosAsyncTask.COORD0);
+                c1 = extras.getString(EventosAsyncTask.COORD1);
+                if (!coordenadaLlegan0.equals("") || !coordenadaLlegan1.equals("")) {
+                    Intent i = new Intent(DescriptionActivity.this, MapsActivity.class);
+                    i.putExtra(EventosAsyncTask.COORD1, c1);
+                    i.putExtra(EventosAsyncTask.COORD0, c0);
+                    i.putExtra(EventosAsyncTask.TITLE, title);
+                    startActivity(i);
+                } else {
+                    AlertDialog.Builder ventana;
+                    ventana = new AlertDialog.Builder(DescriptionActivity.this);
+                    ventana.setTitle("Advertencia");
+                    ventana.setMessage("Este evento no dispone de ubicación.");
+                    ventana.setIcon(R.drawable.info);
+                    ventana.show();
+                }
             }
-            else{
-                AlertDialog.Builder ventana;
-                ventana = new AlertDialog.Builder(DescriptionActivity.this);
-                ventana.setTitle("Advertencia");
-                ventana.setMessage("Este evento no dispone de ubicación.");
-                ventana.setIcon(R.drawable.info);
-                ventana.show();
-            }
-        }
-    });
+        });
 
-    bt_redsocial.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if(NavigationActivity.login==1){
-                FragmentManager fm=getSupportFragmentManager();
-                FragmentoSeleccion fs= new FragmentoSeleccion();
-                fs.show(fm,"Alerta TAG");
-            }else{
-                AlertDialog.Builder ventana;
-                ventana = new AlertDialog.Builder(DescriptionActivity.this);
-                ventana.setTitle("Advertencia");
-                ventana.setMessage("Necesita registrarse para esta función");
-                ventana.setIcon(R.drawable.info);
-                ventana.show();
+        bt_redsocial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (NavigationActivity.login == 1) {
+                    FragmentManager fm = getSupportFragmentManager();
+                    FragmentoSeleccion fs = new FragmentoSeleccion();
+                    fs.show(fm, "Alerta TAG");
+                } else {
+                    AlertDialog.Builder ventana;
+                    ventana = new AlertDialog.Builder(DescriptionActivity.this);
+                    ventana.setTitle("Advertencia");
+                    ventana.setMessage("Necesita registrarse para esta función");
+                    ventana.setIcon(R.drawable.info);
+                    ventana.show();
+                }
             }
-        }
-    });
+        });
 
     }
 
     @Override
     public void idiomaSeleccionado(String idioma) {
         Toast.makeText(getApplicationContext(), "Has elegido: " + idioma, Toast.LENGTH_LONG).show();
-       switch (idioma){
-           case "Whatsapp":
-               Intent i =new Intent(Intent.ACTION_SEND);
-               i.setType("text/plain");
-               i.putExtra(Intent.EXTRA_TEXT,"Gracias a la apicación ZaragozaEvents acudiré al evento: \n"+title);
-               i.setPackage("com.whatsapp");
-               startActivity(i);
-               break;
-           case "Facebook":
-               Intent i2 =new Intent(Intent.ACTION_SEND);
-               i2.setType("text/plain");
-               i2.putExtra(Intent.EXTRA_TEXT,"Gracias a la apicación ZaragozaEvents acudiré al evento: \n");
-               i2.setPackage("com.facebook.katana");
-               startActivity(i2);
-               break;
+        switch (idioma) {
+            case "Whatsapp":
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("text/plain");
+                i.putExtra(Intent.EXTRA_TEXT, "Gracias a la apicación ZaragozaEvents acudiré al evento: \n" + title);
+                i.setPackage("com.whatsapp");
+                startActivity(i);
+                break;
+            case "Facebook":
+                Intent i2 = new Intent(Intent.ACTION_SEND);
+                i2.setType("text/plain");
+                i2.putExtra(Intent.EXTRA_TEXT, "Gracias a la apicación ZaragozaEvents acudiré al evento: \n");
+                i2.setPackage("com.facebook.katana");
+                startActivity(i2);
+                break;
 
-       }
+        }
 
     }
 }
