@@ -8,7 +8,6 @@ public class Evento {
     private String titleEvent;
     private String place_title;
     private String addres;
-    private String region;
     private String titleCategory;
     private String c0;
     private String c1;
@@ -21,21 +20,21 @@ public class Evento {
     private String endTime;
     private String dayOfWeek;
     private String horario;
-
-
-    public Evento(String titleEvent, String description, String lugar, String starDate, String titleCategory) {
-        this.description = description;
-        this.titleEvent = titleEvent;
-        this.addres = lugar;
-        this.image = image;
-        this.titleCategory = titleCategory;
-        this.startDate = starDate;
-    }
+    private String url;
 
 
     public Evento() {
 
     }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
 
     public String getId() {
         return id;
@@ -52,14 +51,6 @@ public class Evento {
 
     public void setTitleEvent(String titleEvent) {
         this.titleEvent = titleEvent;
-    }
-
-    public String getRegion() {
-        return region;
-    }
-
-    public void setRegion(String region) {
-        this.region = region;
     }
 
     public String getPlace() {

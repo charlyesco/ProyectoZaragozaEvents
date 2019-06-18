@@ -40,6 +40,8 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
     public static final String COORD0 = "0";
     public static final String COORD1 = "1";
     public final String IMAGE = "image";
+    public static final String URL = "url";
+    public static final String REGISTRATION = "registration";
     final AdaptadorFiltro a = null;
 
     public EventosAsyncTask(IEventos ievento, AdaptadorFiltro a) {
@@ -219,6 +221,14 @@ public class EventosAsyncTask extends AsyncTask<Void, Evento, Boolean> {
                     evento.setC0("");
                     evento.setC1("");
                 }
+                try {
+                    JSONObject registro = contenedor.getJSONObject(REGISTRATION);
+                    evento.setUrl(registro.getString(URL));
+
+                } catch (JSONException v) {
+                    evento.setUrl("");
+                }
+
                 publishProgress(evento);
             }
         } catch (IOException ex) {

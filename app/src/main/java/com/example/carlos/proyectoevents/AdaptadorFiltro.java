@@ -132,62 +132,96 @@ public class AdaptadorFiltro extends BaseAdapter implements Filterable {
 
         String b = Normalizer.normalize(tema, Normalizer.Form.NFD).toLowerCase();
         b = b.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
-        int result = R.drawable.cine;
-        if (b.equals("conferencias y congresos")) {
-            result = R.drawable.conferencias;
+        int result;
+        switch (b) {
+            case "conferencias y congresos":
+                result = R.drawable.conferencias;
+                break;
+            case "artes plasticas":
+                result = R.drawable.artes_plasticas;
+                break;
+            case "musica":
+                result = R.drawable.musica;
+                break;
+            case "deporte":
+                result = R.drawable.deporte;
+                break;
+            case "ocio y juegos":
+                result = R.drawable.ocio;
 
-        } else if (b.equals("artes plasticas")) {
-            result = R.drawable.artes_plasticas;
-        } else if (b.equals("musica")) {
-            result = R.drawable.musica;
-        } else if (b.equals("deporte")) {
-            result = R.drawable.deporte;
-        } else if (b.equals("ocio y juegos")) {
-            result = R.drawable.ocio;
-        } else if (b.equals("cine")) {
-            result = R.drawable.cine;
-        } else if (b.equals("otros")) {
-            result = R.drawable.otros;
-        } else if (b.equals("gastronomia")) {
-            result = R.drawable.gastronomia;
-        } else if (b.equals("cursos y talleres")) {
-            result = R.drawable.cursos_talleres;
-        } else if (b.equals("imagen y sonido")) {
-            result = R.drawable.imagen_sonido;
-        } else if (b.equals("cine")) {
-            result = R.drawable.cine;
-        } else if (b.equals("otros")) {
-            result = R.drawable.otros;
-        } else if (b.equals("visitas turisticas")) {
-            result = R.drawable.actividades_turisticas;
-        } else if (b.equals("ciencia y tecnologia")) {
-            result = R.drawable.ciencia;
-        } else if (b.equals("exposiciones")) {
-            result = R.drawable.picture;
-        } else if (b.equals("actividades vacacionales")) {
-            result = R.drawable.vacacionales;
-        } else if (b.equals("teatro y artes escenicas")) {
-            result = R.drawable.teatro;
-        } else if (b.equals("turismo")) {
-            result = R.drawable.turismo;
-        } else if (b.equals("formacion")) {
-            result = R.drawable.formacion;
-        } else if (b.equals("ferias y fiestas")) {
-            result = R.drawable.fiestas;
-        } else if (b.equals("medio ambiente y naturaleza")) {
-            result = R.drawable.medio_ambiente;
-        } else if (b.equals("idiomas")) {
-            result = R.drawable.idiomas;
-        } else if (b.equals("desarrollo personal")) {
-            result = R.drawable.personal;
-        } else if (b.equals("aire libre y excursiones")) {
-            result = R.drawable.aire_libre_excursiones;
-        } else {
-            result = R.drawable.cine;
+                break;
+            case "cine":
+                result = R.drawable.cine;
+
+                break;
+            case "otros":
+                result = R.drawable.otros;
+
+                break;
+            case "gastronomia":
+                result = R.drawable.gastronomia;
+
+                break;
+            case "cursos y talleres":
+                result = R.drawable.cursos_talleres;
+
+                break;
+            case "imagen y sonido":
+                result = R.drawable.imagen_sonido;
+
+                break;
+            case "visitas turisticas":
+                result = R.drawable.actividades_turisticas;
+
+                break;
+            case "ciencia y tecnologia":
+                result = R.drawable.ciencia;
+
+                break;
+            case "exposiciones":
+                result = R.drawable.picture;
+
+                break;
+            case "actividades vacacionales":
+                result = R.drawable.vacacionales;
+
+                break;
+            case "teatro y artes escenicas":
+                result = R.drawable.teatro;
+                break;
+            case "turismo":
+                result = R.drawable.turismo;
+                break;
+            case "formacion":
+                result = R.drawable.formacion;
+
+                break;
+            case "ferias y fiestas":
+                result = R.drawable.fiestas;
+
+                break;
+            case "medio ambiente y naturaleza":
+                result = R.drawable.medio_ambiente;
+
+                break;
+            case "idiomas":
+                result = R.drawable.idiomas;
+
+                break;
+            case "desarrollo personal":
+                result = R.drawable.personal;
+                break;
+            case "aire libre y excursiones":
+                result = R.drawable.aire_libre_excursiones;
+            default:
+                result = R.drawable.otros;
+                break;
         }
 
 
         return result;
+
+
     }
 
     public ArrayList<Evento> getListaEventos() {
