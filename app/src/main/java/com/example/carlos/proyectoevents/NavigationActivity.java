@@ -88,6 +88,7 @@ public class NavigationActivity extends AppCompatActivity
                 intento.putExtra(EventosAsyncTask.TITLE_CATEGORY, e.getTitleCategory().toString());
                 intento.putExtra(EventosAsyncTask.STARTDATE, e.getStartDate().toString());
                 intento.putExtra(EventosAsyncTask.ENDDATE, e.getEndDate());
+                intento.putExtra(EventosAsyncTask.URL,e.getUrl());
                 intento.putExtra(EventosAsyncTask.TITLE, e.getTitleEvent().toString());
                 intento.putExtra(EventosAsyncTask.HORARIO, e.getHorario().toString());//  intento.putExtra(IMAGE_RES_ID_KEY,e.getImageBmp());
                 intento.putExtra(IMAGE_RES_ID_KEY, createImageFromBitmap(e.getImageBmp()));

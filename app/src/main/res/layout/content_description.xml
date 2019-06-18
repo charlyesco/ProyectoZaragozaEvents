@@ -169,21 +169,29 @@
             android:id="@+id/bt_redsocial"
             android:layout_width="49dp"
             android:layout_height="42dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="12dp"
             android:layout_marginBottom="8dp"
-            android:src="@drawable/compartir2"
             android:background="@color/common_google_signin_btn_text_dark_default"
+            android:src="@drawable/compartir2"
             android:text="Button"
             app:layout_constraintBottom_toTopOf="@+id/tv_desc_lugar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/bt_desc_anadir"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.125" />
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageButton
+            android:id="@+id/bt_web"
+            android:layout_width="46dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@color/common_google_signin_btn_text_dark_default"
+            android:src="@drawable/web"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/bt_redsocial"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </android.support.constraint.ConstraintLayout>

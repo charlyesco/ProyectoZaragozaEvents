@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.CalendarContract;
@@ -32,6 +33,7 @@ import java.util.Locale;
 
 public class DescriptionActivity extends AppCompatActivity implements FragmentoSeleccion.Idioma {
     public static String title = "";
+    public static String url="";
 
     @TargetApi(Build.VERSION_CODES.N)
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -41,7 +43,7 @@ public class DescriptionActivity extends AppCompatActivity implements FragmentoS
         String start = null, end = null, startDayName = null, endDayName = null, startMonthName = null, endMonthName = null;
         int startYearName = 0, endYearName = 0, startFinalDay = 0, endFinalDay = 0, startMonth = 0, endMonth = 0, startWeekDay = 0, endWeekDay = 0, todayFinalDay = 0, todayMonth = 0, todayYear = 0;
         String mensaje = null, mensaje2 = null, mensaje3 = null, mensajeMañana = null, mensajeMismoDia;
-        ImageButton b, buttoMaps, bt_redsocial;
+        ImageButton b, buttoMaps, bt_redsocial,bt_web;
         ImageView iconoTema, cartel;
         Date date = null, date2 = null;
         Bitmap bimage = null;
@@ -54,6 +56,7 @@ public class DescriptionActivity extends AppCompatActivity implements FragmentoS
         setContentView(R.layout.activity_description);
 
         title = extras.getString(EventosAsyncTask.TITLE);
+        url=extras.getString(EventosAsyncTask.URL);
         final String des = extras.getString(EventosAsyncTask.DESCRIPTION), cat = extras.getString(EventosAsyncTask.TITLE_CATEGORY), lugar = extras.getString(EventosAsyncTask.STREET);
         final String m = Html.fromHtml(extras.getString(EventosAsyncTask.DESCRIPTION), Html.FROM_HTML_MODE_LEGACY).toString();
 
@@ -78,11 +81,13 @@ public class DescriptionActivity extends AppCompatActivity implements FragmentoS
         tv_lugar = findViewById(R.id.tv_desc_lugar);
         tv_fecha = findViewById(R.id.tv_desc_fecha);
         tv_horario = findViewById(R.id.tv_desc_horario);
+        bt_web=findViewById(R.id.bt_web);
 
         tv_desc.setMovementMethod(new ScrollingMovementMethod());
 
         start = extras.getString(EventosAsyncTask.STARTDATE);
         end = extras.getString(EventosAsyncTask.ENDDATE);
+
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -227,6 +232,28 @@ public class DescriptionActivity extends AppCompatActivity implements FragmentoS
             }
         });
 
+        final String finalUrl = url;
+
+        bt_web.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if(!finalUrl.equals("")) {
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(finalUrl));
+                    startActivity(i);
+                }else{
+                    AlertDialog.Builder ventana;
+                    ventana = new AlertDialog.Builder(DescriptionActivity.this);
+                    ventana.setTitle("Advertencia");
+                    ventana.setMessage("No esta disponible el enlace de la Web.");
+                    ventana.setIcon(R.drawable.info);
+                    ventana.show();
+                }
+            }
+
+        });
+
     }
 
     @Override
@@ -236,7 +263,7 @@ public class DescriptionActivity extends AppCompatActivity implements FragmentoS
             case "Whatsapp":
                 Intent i = new Intent(Intent.ACTION_SEND);
                 i.setType("text/plain");
-                i.putExtra(Intent.EXTRA_TEXT, "Gracias a la apicación ZaragozaEvents acudiré al evento: \n" + title);
+                i.putExtra(Intent.EXTRA_TEXT, "Gracias a la apicación ZaragozaEvents acudiré al evento: \n" + title+"\n"+url);
                 i.setPackage("com.whatsapp");
                 startActivity(i);
                 break;
